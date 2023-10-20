@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 const nun = localFont({
-  src: '../../public/fonts/nunito.ttf',
+  src: '../../../public/fonts/nunito.ttf',
   weight: '400',
   variable: '--font-comfort',
 })
@@ -25,9 +25,11 @@ export default function RootLayout({
       <body
         className={`w-screen bg-neutral-200 overflow-x-hidden ${nun.className}`}
       >
-        <Navbar />
-        <div className="w-full h-full">{children}</div>
-        <Footer />
+        <div className="w-full h-full">
+          <Navbar />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   )

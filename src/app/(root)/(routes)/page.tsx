@@ -4,11 +4,15 @@ import { categories } from '@/data'
 import { MoveRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import BestCourses from './_components/BestCourses'
+import RecentCourses from './_components/RecentCourses'
+import BecomeInstructor from './_components/BecomeInstructor'
+import Instructor from './_components/Instructor'
 
 export default function Home() {
   return (
     <main className="w-full h-fit flex flex-col items-start gap-20">
-      <header className="w-full items-start lg:items-center flex flex-col lg:flex-row justify-between h-[548px] pl-52">
+      <header className="w-full items-start lg:items-center flex flex-col lg:flex-row justify-between h-[548px] pl-52 border-t border-neutral-300">
         <div className="w-full lg:w-[45%] h-fit flex flex-col items-start gap-5">
           <h2 className="text-[60px] font-semibold leading-[4rem]">
             Learn with expert anytime anywhere
@@ -83,6 +87,10 @@ export default function Home() {
           </div>
         </MaxWidthWrapper>
       </section>
+      <BestCourses />
+      <RecentCourses />
+      <BecomeInstructor />
+      <Instructor />
     </main>
   )
 }

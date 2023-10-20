@@ -6,7 +6,6 @@ type Categories = {
   nc: string
   imgColor: string
   bgColor: string
-  shadow?: string
 }[]
 
 export const categories: Categories = [
@@ -117,5 +116,216 @@ export const categories: Categories = [
     nc: '1,678',
     imgColor: '#fff',
     bgColor: '#FFF2E5',
+  },
+]
+
+type BestCourses = {
+  id: string
+  category: string
+  price: string
+  title: string
+  image: string
+  studentNo: string
+}[]
+
+export const bestCourses: BestCourses = [
+  {
+    id: '1',
+    category: 'Design',
+    price: '57',
+    title: 'Machine Learning A-Z: Hands-On Python & R in Data Management',
+    image: '/images/c1.png',
+    studentNo: '265.7k',
+  },
+  {
+    id: '2',
+    category: 'Developments',
+    price: '57',
+    title: 'The Complete 2023 Web Development Bootcamp',
+    image: '/images/c2.png',
+    studentNo: '265.7k',
+  },
+  {
+    id: '3',
+    category: 'Business',
+    price: '57',
+    title: 'learn Python Programmaing Masterclass',
+    image: '/images/c3.png',
+    studentNo: '265.7k',
+  },
+  {
+    id: '4',
+    category: 'IT & Software',
+    price: '57',
+    title: 'The Complete Digital Marketing Course - 12 Courses in 1',
+    image: '/images/c4.png',
+    studentNo: '265.7k',
+  },
+  {
+    id: '5',
+    category: 'Marketing',
+    price: '57',
+    title: 'Reiki Level I, II Master/Teacher Program',
+    image: '/images/c5.png',
+    studentNo: '265.7k',
+  },
+  {
+    id: '6',
+    category: 'Design',
+    price: '57',
+    title: 'Reiki Level I, II Master/Teacher Program',
+    image: '/images/c6.png',
+    studentNo: '265.7k',
+  },
+  {
+    id: '7',
+    category: 'Helath & Fitness',
+    price: '57',
+    title: 'Reiki Level I, II Master/Teacher Program',
+    image: '/images/c7.png',
+    studentNo: '265.7k',
+  },
+  {
+    id: '8',
+    category: 'Music',
+    price: '57',
+    title: 'Reiki Level I, II Master/Teacher Program',
+    image: '/images/c8.png',
+    studentNo: '265.7k',
+  },
+]
+
+type FeaturedCourses = {
+  id: string
+  category: string
+  price: string
+  title: string
+  tutor: string
+  image: string
+  studentNo: string
+  time: string
+}[]
+
+export const featuredCourse: FeaturedCourses = [
+  {
+    id: '1',
+    category: 'Health & Fitness',
+    title: 'Machine Learning A-Z: Hands-On Python & R in Data Management',
+    tutor: 'John Doe',
+    image: '/images/c9.png',
+    studentNo: '265.7k',
+    time: '6',
+    price: '14.00',
+  },
+  {
+    id: '2',
+    category: 'Development',
+    title: 'The Complete 2023 Web Development Bootcamp',
+    tutor: 'John Doe',
+    image: '/images/c10.png',
+    studentNo: '265.7k',
+    time: '6',
+    price: '14.00',
+  },
+  {
+    id: '3',
+    category: 'Productivity',
+    title: 'Machine Learning A-Z: Hands-On Python & R in Data Management',
+    tutor: 'John Doe',
+    image: '/images/c7.png',
+    studentNo: '265.7k',
+    time: '6',
+    price: '14.00',
+  },
+  {
+    id: '4',
+    category: 'Music',
+    title: 'The Complete 2023 Web Development Bootcamp',
+    tutor: 'John Doe',
+    image: '/images/c8.png',
+    studentNo: '265.7k',
+    time: '6',
+    price: '14.00',
+  },
+]
+
+export const recentCourse: BestCourses = [
+  {
+    id: '1',
+    category: 'Design',
+    price: '57',
+    title: 'Machine Learning A-Z: Hands-On Python & R in Data Management',
+    image: '/images/c1.png',
+    studentNo: '265.7k',
+  },
+  {
+    id: '2',
+    category: 'Developments',
+    price: '57',
+    title: 'The Complete 2023 Web Development Bootcamp',
+    image: '/images/c2.png',
+    studentNo: '265.7k',
+  },
+  {
+    id: '3',
+    category: 'Business',
+    price: '57',
+    title: 'learn Python Programmaing Masterclass',
+    image: '/images/c3.png',
+    studentNo: '265.7k',
+  },
+  {
+    id: '4',
+    category: 'IT & Software',
+    price: '57',
+    title: 'The Complete Digital Marketing Course - 12 Courses in 1',
+    image: '/images/c4.png',
+    studentNo: '265.7k',
+  },
+]
+
+type Instructor = {
+  image: string
+  name: string
+  position: string
+  rating: string
+  studentNo: string
+}[]
+
+export const instructor: Instructor = [
+  {
+    image: '/images/i1.png',
+    name: 'Devon Lane',
+    position: 'Senior Developer',
+    rating: '4.6',
+    studentNo: '854',
+  },
+  {
+    image: '/images/i2.png',
+    name: 'Darrell Steward',
+    position: 'Digital Product Designer',
+    rating: '4.9',
+    studentNo: '451,444',
+  },
+  {
+    image: '/images/i3.png',
+    name: 'Jane Cooper',
+    position: 'UI/UX Designer',
+    rating: '4.8',
+    studentNo: '435,671',
+  },
+  {
+    image: '/images/i4.png',
+    name: 'Albert Flores',
+    position: 'Adobe Instructor',
+    rating: '4.7',
+    studentNo: '511,123',
+  },
+  {
+    image: '/images/i5.png',
+    name: 'Kathryn Murphy',
+    position: 'Lead Developer',
+    rating: '4.2',
+    studentNo: '2,711',
   },
 ]

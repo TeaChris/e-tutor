@@ -1,4 +1,3 @@
-
 import Link from 'next/link'
 import MaxWidthWrapper from './MaxWidthWrapper'
 import {
@@ -24,7 +23,6 @@ const nav: Nav = [
   { label: 'Become an Instructor', href: '/instructor' },
 ]
 export default function Navbar() {
-
   return (
     <nav className="w-full bg-transparent flex flex-col items-start gap-0">
       {/* top nav */}
@@ -123,7 +121,7 @@ export default function Navbar() {
 
             <div className="w-fit flex items-center gap-3">
               <Link href="/sign-up">
-                <Button className="bg-orange-200 text-orange-600 hover:bg-orange-200">
+                <Button className="bg-[#FFEEE8] text-[#FF6636] hover:bg-[#FFEEE8]">
                   Create account
                 </Button>
               </Link>
