@@ -1,3 +1,3 @@
 export default function CoursePage() {
-  return <div></div>
+  return <div>CoursePage</div>
 }
