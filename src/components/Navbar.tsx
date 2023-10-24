@@ -8,7 +8,9 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import Image from 'next/image'
-import { Button, buttonVariants } from './ui/button'
+import { Button } from './ui/button'
+import { UserButton, auth } from '@clerk/nextjs'
+import { PlusCircle } from 'lucide-react'
 
 type Nav = {
   label: string
@@ -23,6 +25,7 @@ const nav: Nav = [
   { label: 'Become an Instructor', href: '/instructor' },
 ]
 export default function Navbar() {
+  const { userId } = auth()
   return (
     <nav className="w-full bg-transparent flex flex-col items-start gap-0">
       {/* top nav */}
@@ -79,17 +82,12 @@ export default function Navbar() {
                 height={120}
               />
             </Link>
-            <Select>
-              <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder="Browse" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="fe">Frontend Engineering</SelectItem>
-                <SelectItem value="be">Backend Engineering</SelectItem>
-                <SelectItem value="ce">Cloud Engineering</SelectItem>
-                <SelectItem value="fds">Full-Stack Development</SelectItem>
-              </SelectContent>
-            </Select>
+            <Link href="/instructor/create">
+              <Button variant={'default'} className="flex items-center gap-2">
+                <PlusCircle className="h-4 w-4" />
+                create
+              </Button>
+            </Link>
           </div>
           <div className="flex items-center gap-4 w-fit">
             <div className="w-fit flex items-center gap-3">
@@ -120,14 +118,20 @@ export default function Navbar() {
             </div>
 
             <div className="w-fit flex items-center gap-3">
-              <Link href="/sign-up">
-                <Button className="bg-[#FFEEE8] text-[#FF6636] hover:bg-[#FFEEE8]">
-                  Create account
-                </Button>
-              </Link>
-              <Link href="/sign-up">
-                <Button variant={'default'}>Sign in</Button>
-              </Link>
+              {userId ? (
+                <UserButton afterSignOutUrl="/" />
+              ) : (
+                <>
+                  <Link href="/sign-up">
+                    <Button className="bg-[#FFEEE8] text-[#FF6636] hover:bg-[#FFEEE8]">
+                      Create account
+                    </Button>
+                  </Link>
+                  <Link href="/sign-up">
+                    <Button variant={'default'}>Sign in</Button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </MaxWidthWrapper>
