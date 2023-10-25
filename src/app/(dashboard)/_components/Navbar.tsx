@@ -48,7 +48,7 @@ export default function Navbar() {
           <h6 className="capitalize text-[#6E7485] text-[14px] font-[500]">
             {getGreeting()}
           </h6>
-          <h4 className="first-letter:capitalize text-[#1D2026] font-semibold text-xl">
+          <h4 className="first-letter:capitalize text-[#1D2026] font-semibold text-base">
             {title}
           </h4>
         </div>

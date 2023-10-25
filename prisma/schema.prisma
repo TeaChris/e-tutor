@@ -16,6 +16,7 @@ model Course{
   id              String @id @default(uuid()) @map("_id")
   userId          String
   title           String
+  topic           String
   description     String?
   imageUrl        String?
   price           Float?
@@ -23,6 +24,12 @@ model Course{
 
   categoryId      String?
   category        Category? @relation(fields: [categoryId], references: [id])
+
+  languageId      String?
+  language        Language? @relation(fields: [languageId], references: [id])
+
+  courseLevelId      String?
+  courseLevel        CourseLevel? @relation(fields: [languageId], references: [id])
 
   chapters        Chapter[]
   attachments     Attachment[]
@@ -36,6 +43,18 @@ model Course{
 }
 
 model Category {
+  id         String @id @default(uuid()) @map("_id")
+  name       String
+  Courses    Course[]
+}
+
+model Language {
+  id         String @id @default(uuid()) @map("_id")
+  name       String
+  Courses    Course[]
+}
+
+model CourseLevel {
   id         String @id @default(uuid()) @map("_id")
   name       String
   Courses    Course[]
