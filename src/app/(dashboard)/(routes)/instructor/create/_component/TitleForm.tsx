@@ -41,7 +41,7 @@ const formSchema = z.object({
   courseLevelId: z.string().min(1),
 })
 
-export default function BasicForm() {
+export default function TitleForm() {
   const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({

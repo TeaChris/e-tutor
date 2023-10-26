@@ -1,60 +1,115 @@
-import { redirect } from 'next/navigation'
+'use client'
 
-import MaxWidthWrapper from '@/components/MaxWidthWrapper'
-import { auth } from '@clerk/nextjs'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import BasicForm from './_component/BasicForm'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { z } from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
+import axios from 'axios'
+// import toast from 'react-hot-toast'
+import { useToast } from '@/components/ui/use-toast'
+
+const formSchema = z.object({
+  title: z
+    .string()
+    .min(1)
+    .refine((title) => title.trim() !== '', {
+      message: 'Title is required',
+    }),
+})
 
 export default function Create() {
-  const { userId } = auth()
+  const router = useRouter()
+  const { toast } = useToast()
 
-  if (!userId) {
-    return redirect('/')
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: ' ',
+    },
+  })
+
+  const { isSubmitting, isValid } = form.formState
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const response = await axios.post('/api/courses', values)
+      router.push(`/instructor/create/${response.data.id}`)
+      toast({
+        title: 'Success',
+        description: 'Your course was created successfully',
+        variant: 'default',
+      })
+    } catch {
+      toast({
+        title: 'Error',
+        description: 'Failed to create course',
+        variant: 'destructive',
+      })
+    }
   }
 
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="bg-white shadow-sm shadow-neutral-200 rounded-[4px] w-[90%] h-[90%] flex flex-col items-start">
-        <div className="w-full h-10 flex items-start justify-between">
-          <Tabs defaultValue="basic" className="w-full">
-            <TabsList className="flex items-start justify-between w-full">
-              <TabsTrigger value="basic">Basic information</TabsTrigger>
-              <TabsTrigger value="advanced">Advanced information</TabsTrigger>
-              <TabsTrigger value="curriculum">Curriculum</TabsTrigger>
-              <TabsTrigger value="publish">Publish course</TabsTrigger>
-            </TabsList>
-            <TabsContent
-              value="basic"
-              className="w-full flex flex-col items-start"
-            >
-              <div className="w-full h-12 border-b border-neutral-300">
-                <MaxWidthWrapper className="flex flex-col items-start h-full">
-                  <div className="w-full h-14 flex items-center justify-between">
-                    <h4 className="text-lg first-letter:capitalize text-black">
-                      Basic information
-                    </h4>
+    <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
+      <div>
+        <h1 className="text-2xl">Name your course</h1>
+        <p className="text-sm text-slate-600">
+          What would you like to name your course? Don&apos;t worry, you can
+          change this later.
+        </p>
 
-                    <div className="w-fit flex items-start gap-4">
-                      <Button className="bg-[#FFEEE8] text-[#FF6636] hover:bg-[#ffeee8] hover:text-[#ff6636]">
-                        save
-                      </Button>
-                      <Button
-                        variant={'ghost'}
-                        className="text-[#FF6636] hover:bg-[#ffeee8] hover:text-[#ff6636]"
-                      >
-                        save & preview
-                      </Button>
-                    </div>
-                  </div>
-                </MaxWidthWrapper>
-              </div>
-              <MaxWidthWrapper className="px">
-                <BasicForm />
-              </MaxWidthWrapper>
-            </TabsContent>
-          </Tabs>
-        </div>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8 mt-8"
+          >
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Course title</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isSubmitting}
+                      placeholder="e.g. 'Advanced web development'"
+                      {...field}
+                      required
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    What will you teach in this course?
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex items-center gap-x-2">
+              <Link href="/">
+                <Button
+                  type="button"
+                  className="bg-[#FFEEE8] text-[#FF6636] hover:bg-[#FFEEE8]"
+                >
+                  Cancel
+                </Button>
+              </Link>
+              <Button type="submit" disabled={!isValid || isSubmitting}>
+                Continue
+              </Button>
+            </div>
+          </form>
+        </Form>
       </div>
     </div>
   )

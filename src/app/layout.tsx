@@ -4,6 +4,7 @@ import localFont from 'next/font/local'
 import React from 'react'
 import { ClerkProvider } from '@clerk/nextjs'
 import ToastProvider from '@/providers/ToastProvider'
+import { Toaster } from '@/components/ui/toaster'
 
 const nun = localFont({
   src: '../../public/fonts/nunito.ttf',
@@ -30,6 +31,7 @@ export default function RootLayout({
           <div className="w-full h-full">
             <ToastProvider />
             {children}
+            <Toaster />
           </div>
         </body>
       </html>
