@@ -4,11 +4,19 @@ import * as z from 'zod'
 import axios from 'axios'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { Pencil } from 'lucide-react'
 import { useState } from 'react'
 import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
 
+import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import {
   Form,
   FormControl,
@@ -16,39 +24,26 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form'
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import { Pencil } from 'lucide-react'
+import { Course } from '@prisma/client'
+import { cn } from '@/lib/utils'
 
-interface EditTitleFormProps {
-  initialData: {
-    title: string
-  }
+interface TopicFormProps {
+  initialData: Course
   courseId: string
 }
 
 const formSchema = z.object({
-  title: z
+  topic: z
     .string()
     .min(1)
-    .refine((title) => title.trim() !== '', {
-      message: 'Title is required',
+    .refine((topic) => topic.trim() !== '', {
+      message: 'Topic is required',
     }),
 })
 
-export default function EditTitleForm({
-  initialData,
-  courseId,
-}: EditTitleFormProps) {
+export default function TopicForm({ initialData, courseId }: TopicFormProps) {
   const [editing, setEditing] = useState<boolean>(false)
 
   const router = useRouter()
@@ -56,7 +51,9 @@ export default function EditTitleForm({
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData,
+    defaultValues: {
+      topic: initialData?.topic || '',
+    },
   })
 
   const { isSubmitting, isValid } = form.formState
@@ -66,14 +63,14 @@ export default function EditTitleForm({
       await axios.patch(`/api/courses/${courseId}`, values)
       toast({
         title: 'Success',
-        description: 'Course title edited successfully',
+        description: 'Course topic edited successfully',
         variant: 'default',
       })
       router.refresh()
     } catch {
       toast({
         title: 'Error',
-        description: 'Failed to edit title',
+        description: 'Failed to edit topic',
         variant: 'destructive',
       })
     }
@@ -82,21 +79,23 @@ export default function EditTitleForm({
   return (
     <div className="mt-6 border bg-[#FFEEE8] rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Course title
+        Course Topic
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="ghost">
               <>
                 <Pencil className="h-4 w-4 mr-2" />
-                Edit title
+                {(initialData.topic && 'Edit topic') || 'Create topic'}
               </>
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Edit Title</DialogTitle>
+              <DialogTitle>
+                {(initialData.topic && 'Edit topic') || 'Create topic'}
+              </DialogTitle>
               <DialogDescription>
-                Now, you can edit your title!
+                What is primarily taught in this course?
               </DialogDescription>
             </DialogHeader>
             <Form {...form}>
@@ -106,7 +105,7 @@ export default function EditTitleForm({
               >
                 <FormField
                   control={form.control}
-                  name="title"
+                  name="topic"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
@@ -130,7 +129,16 @@ export default function EditTitleForm({
           </DialogContent>
         </Dialog>
       </div>
-      {!editing && <p className="text-sm mt-2">{initialData.title}</p>}
+      {!editing && (
+        <p
+          className={cn(
+            'text-sm mt-2',
+            !initialData.topic && 'text-slate-500 italic'
+          )}
+        >
+          {initialData.topic || 'No topic'}
+        </p>
+      )}
     </div>
   )
 }

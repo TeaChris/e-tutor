@@ -4,6 +4,7 @@ import { auth } from '@clerk/nextjs'
 import { LayoutDashboard } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import EditTitleForm from './_components/EditTitleForm'
+import TopicForm from './_components/TopicForm'
 
 export default async function CourseIdPage({
   params,
@@ -50,6 +51,7 @@ export default async function CourseIdPage({
     course.description,
     course.imageUrl,
     course.price,
+    course.topic,
     course.categoryId,
     course.sections.some((section) => section.isPublished),
   ]
@@ -78,6 +80,7 @@ export default async function CourseIdPage({
             <h2 className="text-xl">Make necessary edit your course</h2>
           </div>
           <EditTitleForm initialData={course} courseId={course.id} />
+          <TopicForm initialData={course} courseId={course.id} />
         </div>
       </div>
     </div>
