@@ -5,6 +5,7 @@ import { LayoutDashboard } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import EditTitleForm from './_components/EditTitleForm'
 import TopicForm from './_components/TopicForm'
+import CategoryForm from './_components/CategoryForm'
 
 export default async function CourseIdPage({
   params,
@@ -81,6 +82,14 @@ export default async function CourseIdPage({
           </div>
           <EditTitleForm initialData={course} courseId={course.id} />
           <TopicForm initialData={course} courseId={course.id} />
+          <CategoryForm
+            initialData={course}
+            courseId={course.id}
+            options={categories.map((category) => ({
+              label: category.name,
+              value: category.id,
+            }))}
+          />
         </div>
       </div>
     </div>

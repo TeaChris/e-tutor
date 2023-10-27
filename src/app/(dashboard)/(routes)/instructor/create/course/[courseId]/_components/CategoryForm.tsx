@@ -1,22 +1,14 @@
 'use client'
 
-import * as z from 'zod'
-import axios from 'axios'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { useState } from 'react'
 import { useToast } from '@/components/ui/use-toast'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Course } from '@prisma/client'
+import axios from 'axios'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import { useRouter } from 'next/navigation'
 
-import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
 import {
   Form,
   FormControl,
@@ -24,35 +16,51 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 import { Pencil } from 'lucide-react'
-import { Course } from '@prisma/client'
+import { Combobox } from '@/components/ui/combobox'
 import { cn } from '@/lib/utils'
 
-interface TopicFormProps {
+interface CategoryFormProps {
   initialData: Course
   courseId: string
+  options: { label: string; value: string }[]
 }
 
 const formSchema = z.object({
-  topic: z
+  categoryId: z
     .string()
     .min(1)
-    .refine((topic) => topic.trim() !== '', {
-      message: 'Topic is required',
+    .refine((title) => title.trim() !== '', {
+      message: 'Category is required',
     }),
 })
 
-export default function TopicForm({ initialData, courseId }: TopicFormProps) {
+export default function CategoryForm({
+  initialData,
+  courseId,
+  options,
+}: CategoryFormProps) {
   const [editing, setEditing] = useState<boolean>(false)
 
-  const router = useRouter()
   const { toast } = useToast()
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      topic: initialData?.topic || '',
+      categoryId: initialData?.categoryId || '',
     },
   })
 
@@ -63,39 +71,45 @@ export default function TopicForm({ initialData, courseId }: TopicFormProps) {
       await axios.patch(`/api/courses/${courseId}`, values)
       toast({
         title: 'Success',
-        description: 'Course topic edited successfully',
+        description: 'Course title edited successfully',
         variant: 'default',
       })
       router.refresh()
     } catch {
       toast({
         title: 'Error',
-        description: 'Failed to edit topic',
+        description: 'Failed to edit title',
         variant: 'destructive',
       })
     }
   }
 
+  const selectedOption = options.find(
+    (option) => option.value === initialData.categoryId
+  )
+
   return (
     <div className="mt-6 border bg-[#FFEEE8] rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Course topic
+        Course category
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="ghost">
               <>
                 <Pencil className="h-4 w-4 mr-2" />
-                {(initialData.topic && 'Edit topic') || 'Create topic'}
+                {(initialData.categoryId && 'Edit category') ||
+                  'Create category'}
               </>
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle>
-                {(initialData.topic && 'Edit topic') || 'Create topic'}
+                {(initialData.categoryId && 'Edit category') ||
+                  'Create category'}
               </DialogTitle>
               <DialogDescription>
-                What is primarily taught in this course?
+                choose a category that best fit your course
               </DialogDescription>
             </DialogHeader>
             <Form {...form}>
@@ -105,15 +119,11 @@ export default function TopicForm({ initialData, courseId }: TopicFormProps) {
               >
                 <FormField
                   control={form.control}
-                  name="topic"
+                  name="categoryId"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input
-                          disabled={isSubmitting}
-                          placeholder="e.g. 'Advanced web development'"
-                          {...field}
-                        />
+                        <Combobox options={...options} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -133,10 +143,10 @@ export default function TopicForm({ initialData, courseId }: TopicFormProps) {
         <p
           className={cn(
             'text-sm mt-2',
-            !initialData.topic && 'text-slate-500 italic'
+            !initialData.categoryId && 'text-slate-500 italic'
           )}
         >
-          {initialData.topic || 'No topic'}
+          {selectedOption?.label || 'No category'}
         </p>
       )}
     </div>
