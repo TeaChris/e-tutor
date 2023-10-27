@@ -31,7 +31,7 @@ model Course{
   courseLevelId      String?
   courseLevel        CourseLevel? @relation(fields: [languageId], references: [id])
 
-  chapters        Chapter[]
+  sections        Section[]
   attachments     Attachment[]
   purchases       Purchase[]
 
@@ -60,7 +60,7 @@ model CourseLevel {
   Courses    Course[]
 }
 
-model Chapter {
+model Section {
   id          String @id @default(uuid()) @map("_id")
   title       String
   description String?
@@ -115,24 +115,24 @@ model MuxData {
   assetId     String
   playbackId  String?
 
-  chapterId   String @unique
-  chapter     Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  sectionId   String @unique
+  sections     Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
 }
 
 model UserProgress {
    id          String @id @default(uuid()) @map("_id")
   userId       String
 
-  chapterId    String
-  chapter      Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  sectionId    String
+  sections      Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
 
   isCompleted  Boolean @default(false)
 
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  @@index([chapterId])
-  @@unique([userId, chapterId])
+  @@index([sectionId])
+  @@unique([userId, sectionId])
 }
 
 model StripeCustomer{

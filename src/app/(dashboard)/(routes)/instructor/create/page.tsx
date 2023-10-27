@@ -17,7 +17,6 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import axios from 'axios'
-// import toast from 'react-hot-toast'
 import { useToast } from '@/components/ui/use-toast'
 
 const formSchema = z.object({
@@ -45,7 +44,7 @@ export default function Create() {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const response = await axios.post('/api/courses', values)
-      router.push(`/instructor/create/${response.data.id}`)
+      router.push(`/instructor/create/course/${response.data.id}`)
       toast({
         title: 'Success',
         description: 'Your course was created successfully',
