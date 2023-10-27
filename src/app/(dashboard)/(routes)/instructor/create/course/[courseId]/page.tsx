@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation'
 import EditTitleForm from './_components/EditTitleForm'
 import TopicForm from './_components/TopicForm'
 import CategoryForm from './_components/CategoryForm'
+import ImageForm from './_components/ImageForm'
 
 export default async function CourseIdPage({
   params,
@@ -90,6 +91,7 @@ export default async function CourseIdPage({
               value: category.id,
             }))}
           />
+          <ImageForm initialData={course} courseId={course.id} />
         </div>
       </div>
     </div>

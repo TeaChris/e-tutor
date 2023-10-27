@@ -69,7 +69,8 @@ body,
   display: none;
 }
 
-.skew-img {
-  transform: skewY(-5deg);
-  transform-origin: left bottom;
+.ql-container {
+  font-size: 16px !important;
 }
+
+@import "~@uploadthing/react/styles.css"

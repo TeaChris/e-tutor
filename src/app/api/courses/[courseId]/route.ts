@@ -17,8 +17,8 @@ export async function PATCH(
 
     const course = await db.course.update({
       where: {
-        userId,
         id: params.courseId,
+        userId,
       },
       data: {
         ...values,
@@ -27,7 +27,7 @@ export async function PATCH(
 
     return NextResponse.json(course)
   } catch (error) {
-    console.log('COURSE-ID', error)
+    console.log('COURSE_ID', error)
     return new NextResponse('Internal Error', { status: 500 })
   }
 }
