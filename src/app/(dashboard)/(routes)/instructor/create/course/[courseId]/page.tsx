@@ -1,12 +1,13 @@
 import { IconBadge } from '@/components/IconBadge'
 import { db } from '@/lib/db'
 import { auth } from '@clerk/nextjs'
-import { LayoutDashboard } from 'lucide-react'
+import { LayoutDashboard, ListChecks } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import EditTitleForm from './_components/EditTitleForm'
 import TopicForm from './_components/TopicForm'
 import CategoryForm from './_components/CategoryForm'
 import ImageForm from './_components/ImageForm'
+import LanguageForm from './_components/LanguageForm'
 
 export default async function CourseIdPage({
   params,
@@ -39,6 +40,12 @@ export default async function CourseIdPage({
   })
 
   const categories = await db.category.findMany({
+    orderBy: {
+      name: 'asc',
+    },
+  })
+
+  const languages = await db.language.findMany({
     orderBy: {
       name: 'asc',
     },
@@ -92,6 +99,22 @@ export default async function CourseIdPage({
             }))}
           />
           <ImageForm initialData={course} courseId={course.id} />
+          <LanguageForm
+            initialData={course}
+            courseId={course.id}
+            options={languages.map((language) => ({
+              label: language.name,
+              value: language.id,
+            }))}
+          />
+        </div>
+        <div className="space-y-6">
+          <div>
+            <div className="flex items-center gap-x-2">
+              <IconBadge icon={ListChecks} />
+              <h2 className="text-xl">Course chapters</h2>
+            </div>
+          </div>
         </div>
       </div>
     </div>

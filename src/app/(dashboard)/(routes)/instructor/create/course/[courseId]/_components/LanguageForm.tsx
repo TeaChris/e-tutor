@@ -30,26 +30,26 @@ import { Pencil } from 'lucide-react'
 import { Combobox } from '@/components/ui/combobox'
 import { cn } from '@/lib/utils'
 
-interface CategoryFormProps {
+interface LanguageFormProps {
   initialData: Course
   courseId: string
   options: { label: string; value: string }[]
 }
 
 const formSchema = z.object({
-  categoryId: z
+  languageId: z
     .string()
     .min(1)
     .refine((title) => title.trim() !== '', {
-      message: 'Category is required',
+      message: 'Course language is required',
     }),
 })
 
-export default function CategoryForm({
+export default function LanguageForm({
   initialData,
   courseId,
   options,
-}: CategoryFormProps) {
+}: LanguageFormProps) {
   const [editing, setEditing] = useState<boolean>(false)
 
   const { toast } = useToast()
@@ -58,7 +58,7 @@ export default function CategoryForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      categoryId: initialData?.categoryId || '',
+      languageId: initialData?.categoryId || '',
     },
   })
 
@@ -83,7 +83,7 @@ export default function CategoryForm({
   }
 
   const selectedOption = options.find(
-    (option) => option.value === initialData.categoryId
+    (option) => option.value === initialData.languageId
   )
 
   return (
@@ -95,19 +95,19 @@ export default function CategoryForm({
             <Button variant="ghost">
               <>
                 <Pencil className="h-4 w-4 mr-2" />
-                {(initialData.categoryId && 'Edit category') ||
-                  'Create category'}
+                {(initialData.languageId && 'Edit language') ||
+                  'Choose language'}
               </>
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle>
-                {(initialData.categoryId && 'Edit category') ||
-                  'Create category'}
+                {(initialData.languageId && 'Edit language') ||
+                  'Choose language'}
               </DialogTitle>
               <DialogDescription>
-                choose a category that best fit your course
+                choose a primary language by which this course is taught
               </DialogDescription>
             </DialogHeader>
             <Form {...form}>
@@ -117,7 +117,7 @@ export default function CategoryForm({
               >
                 <FormField
                   control={form.control}
-                  name="categoryId"
+                  name="languageId"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
@@ -141,10 +141,10 @@ export default function CategoryForm({
         <p
           className={cn(
             'text-sm mt-2',
-            !initialData.categoryId && 'text-slate-500 italic'
+            !initialData.languageId && 'text-slate-500 italic'
           )}
         >
-          {selectedOption?.label || 'No category'}
+          {selectedOption?.label || 'No course language'}
         </p>
       )}
     </div>
