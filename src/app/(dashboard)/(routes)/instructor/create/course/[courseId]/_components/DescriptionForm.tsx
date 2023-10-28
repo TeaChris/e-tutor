@@ -1,13 +1,14 @@
 'use client'
 
-import { useToast } from '@/components/ui/use-toast'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Course } from '@prisma/client'
+import * as z from 'zod'
 import axios from 'axios'
-import { useState } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import { Pencil } from 'lucide-react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { Course } from '@prisma/client'
+import { useToast } from '@/components/ui/use-toast'
 
 import {
   Form,
@@ -16,6 +17,9 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import { Textarea } from '@/components/ui/textarea'
 import {
   Dialog,
   DialogContent,
@@ -24,41 +28,36 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Pencil } from 'lucide-react'
-import { Combobox } from '@/components/ui/combobox'
-import { cn } from '@/lib/utils'
 
-interface LanguageFormProps {
+interface DescriptionFormProps {
   initialData: Course
   courseId: string
-  options: { label: string; value: string }[]
 }
 
 const formSchema = z.object({
-  languageId: z
+  description: z
     .string()
-    .min(1)
-    .refine((title) => title.trim() !== '', {
-      message: 'Course language is required',
+    .min(10)
+    .refine((topic) => topic.trim() !== '', {
+      message: 'Course description is required',
     }),
 })
 
-export default function LanguageForm({
+export default function DescriptionForm({
   initialData,
   courseId,
-  options,
-}: LanguageFormProps) {
-  const [editing, setEditing] = useState<boolean>(false)
+}: DescriptionFormProps) {
+  const [editing, setEditing] = useState(false)
 
-  const { toast } = useToast()
+  const toggleEdit = () => setEditing((current) => !current)
+
   const router = useRouter()
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      languageId: initialData?.categoryId || '',
+      description: initialData?.description || '',
     },
   })
 
@@ -69,45 +68,42 @@ export default function LanguageForm({
       await axios.patch(`/api/courses/${courseId}`, values)
       toast({
         title: 'Success',
-        description: 'Course language edited successfully',
+        description: 'Course description edited successfully',
         variant: 'default',
       })
       router.refresh()
     } catch {
       toast({
         title: 'Error',
-        description: 'Failed to edit course language',
-        variant: 'destructive',
+        description: 'Failed to edit course description',
+        variant: 'default',
       })
     }
   }
 
-  const selectedOption = options.find(
-    (option) => option.value === initialData.languageId
-  )
-
   return (
     <div className="mt-6 border bg-[#FFEEE8] rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Course language
+        Course description
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="ghost">
               <>
                 <Pencil className="h-4 w-4 mr-2" />
-                {(initialData.languageId && 'Edit language') ||
-                  'Choose language'}
+                {(initialData.description && 'Edit description') ||
+                  'Create description'}
               </>
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle>
-                {(initialData.languageId && 'Edit language') ||
-                  'Choose language'}
+                {(initialData.topic && 'Edit description') ||
+                  'Create description'}
               </DialogTitle>
               <DialogDescription>
-                choose a primary language by which this course is taught
+                Let your student have a description of what would be taught in
+                this course
               </DialogDescription>
             </DialogHeader>
             <Form {...form}>
@@ -117,11 +113,15 @@ export default function LanguageForm({
               >
                 <FormField
                   control={form.control}
-                  name="languageId"
+                  name="description"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Combobox options={...options} {...field} />
+                        <Textarea
+                          disabled={isSubmitting}
+                          placeholder="e.g. 'This course is about...'"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -141,10 +141,10 @@ export default function LanguageForm({
         <p
           className={cn(
             'text-sm mt-2',
-            !initialData.languageId && 'text-slate-500 italic'
+            !initialData.description && 'text-slate-500 italic'
           )}
         >
-          {selectedOption?.label || 'No course language'}
+          {initialData.description || 'No description'}
         </p>
       )}
     </div>

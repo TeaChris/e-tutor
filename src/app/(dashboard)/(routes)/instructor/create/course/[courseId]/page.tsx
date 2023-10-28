@@ -8,6 +8,8 @@ import TopicForm from './_components/TopicForm'
 import CategoryForm from './_components/CategoryForm'
 import ImageForm from './_components/ImageForm'
 import LanguageForm from './_components/LanguageForm'
+import CourseLevelForm from './_components/CourseLevelForm'
+import DescriptionForm from './_components/DescriptionForm'
 
 export default async function CourseIdPage({
   params,
@@ -46,6 +48,12 @@ export default async function CourseIdPage({
   })
 
   const languages = await db.language.findMany({
+    orderBy: {
+      name: 'asc',
+    },
+  })
+
+  const levels = await db.courseLevel.findMany({
     orderBy: {
       name: 'asc',
     },
@@ -107,6 +115,15 @@ export default async function CourseIdPage({
               value: language.id,
             }))}
           />
+          <CourseLevelForm
+            initialData={course}
+            courseId={course.id}
+            options={levels.map((level) => ({
+              label: level.name,
+              value: level.id,
+            }))}
+          />
+          <DescriptionForm initialData={course} courseId={course.id} />
         </div>
         <div className="space-y-6">
           <div>

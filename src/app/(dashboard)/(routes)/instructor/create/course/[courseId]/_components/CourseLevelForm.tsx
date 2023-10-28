@@ -30,26 +30,26 @@ import { Pencil } from 'lucide-react'
 import { Combobox } from '@/components/ui/combobox'
 import { cn } from '@/lib/utils'
 
-interface LanguageFormProps {
+interface CourseLevelFormProps {
   initialData: Course
   courseId: string
   options: { label: string; value: string }[]
 }
 
 const formSchema = z.object({
-  languageId: z
+  courseLevelId: z
     .string()
     .min(1)
     .refine((title) => title.trim() !== '', {
-      message: 'Course language is required',
+      message: 'Level is required',
     }),
 })
 
-export default function LanguageForm({
+export default function CourseLevelForm({
   initialData,
   courseId,
   options,
-}: LanguageFormProps) {
+}: CourseLevelFormProps) {
   const [editing, setEditing] = useState<boolean>(false)
 
   const { toast } = useToast()
@@ -58,7 +58,7 @@ export default function LanguageForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      languageId: initialData?.categoryId || '',
+      courseLevelId: initialData?.categoryId || '',
     },
   })
 
@@ -69,45 +69,43 @@ export default function LanguageForm({
       await axios.patch(`/api/courses/${courseId}`, values)
       toast({
         title: 'Success',
-        description: 'Course language edited successfully',
+        description: 'Course level edited successfully',
         variant: 'default',
       })
       router.refresh()
     } catch {
       toast({
         title: 'Error',
-        description: 'Failed to edit course language',
+        description: 'Failed to edit course level',
         variant: 'destructive',
       })
     }
   }
 
   const selectedOption = options.find(
-    (option) => option.value === initialData.languageId
+    (option) => option.value === initialData.courseLevelId
   )
 
   return (
     <div className="mt-6 border bg-[#FFEEE8] rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Course language
+        Course level
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="ghost">
               <>
                 <Pencil className="h-4 w-4 mr-2" />
-                {(initialData.languageId && 'Edit language') ||
-                  'Choose language'}
+                {(initialData.courseLevelId && 'Edit level') || 'Choose level'}
               </>
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle>
-                {(initialData.languageId && 'Edit language') ||
-                  'Choose language'}
+                {(initialData.courseLevelId && 'Edit level') || 'Choose level'}
               </DialogTitle>
               <DialogDescription>
-                choose a primary language by which this course is taught
+                choose a category that best fit your course
               </DialogDescription>
             </DialogHeader>
             <Form {...form}>
@@ -117,7 +115,7 @@ export default function LanguageForm({
               >
                 <FormField
                   control={form.control}
-                  name="languageId"
+                  name="courseLevelId"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
@@ -141,10 +139,10 @@ export default function LanguageForm({
         <p
           className={cn(
             'text-sm mt-2',
-            !initialData.languageId && 'text-slate-500 italic'
+            !initialData.courseLevelId && 'text-slate-500 italic'
           )}
         >
-          {selectedOption?.label || 'No course language'}
+          {selectedOption?.label || 'No level'}
         </p>
       )}
     </div>
