@@ -133,14 +133,14 @@ export default async function CourseIdPage({
           <div>
             <div className="flex items-center gap-x-2">
               <IconBadge icon={CircleDollarSign} />
-              <h2 className="text-xl">Course chapters</h2>
+              <h2 className="text-xl">Sell your course</h2>
             </div>
             <PriceForm initialData={course} courseId={course.id} />
           </div>
           <div>
             <div className="flex items-center gap-x-2">
               <IconBadge icon={ListChecks} />
-              <h2 className="text-xl">Sell your course</h2>
+              <h2 className="text-xl">Course sections</h2>
             </div>
             <SectionsForm initialData={course} courseId={course.id} />
           </div>
