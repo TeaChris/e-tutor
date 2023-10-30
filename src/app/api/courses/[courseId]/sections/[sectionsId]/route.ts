@@ -25,7 +25,7 @@ export async function PATCH(
       return new NextResponse('Unauthorized', { status: 401 })
     }
 
-    const chapter = await db.chapter.update({
+    const chapter = await db.section.update({
       where: {
         id: params.chapterId,
         courseId: params.courseId,

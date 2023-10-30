@@ -110,7 +110,7 @@ export default function SectionsForm({
   }
 
   const onEdit = (id: string) => {
-    router.push(`/instructor/courses/${courseId}/sections/${id}`)
+    router.push(`/instructor/create/course/${courseId}/sections/${id}`)
   }
 
   return (
