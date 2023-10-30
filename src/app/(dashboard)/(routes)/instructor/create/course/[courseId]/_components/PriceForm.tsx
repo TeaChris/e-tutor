@@ -4,18 +4,11 @@ import * as z from 'zod'
 import axios from 'axios'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { Pencil } from 'lucide-react'
 import { useState } from 'react'
 import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '@/components/ui/form'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -24,29 +17,29 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import { Pencil } from 'lucide-react'
+import { Course } from '@prisma/client'
+import { cn } from '@/lib/utils'
+import { formatPrice } from '@/lib/format'
 
-interface EditTitleFormProps {
-  initialData: {
-    title: string
-  }
+interface PriceFormProps {
+  initialData: Course
   courseId: string
 }
 
 const formSchema = z.object({
-  title: z
-    .string()
-    .min(1)
-    .refine((title) => title.trim() !== '', {
-      message: 'Title is required',
-    }),
+  price: z.coerce.number(),
 })
 
-export default function EditTitleForm({
-  initialData,
-  courseId,
-}: EditTitleFormProps) {
+export default function PriceForm({ initialData, courseId }: PriceFormProps) {
   const [editing, setEditing] = useState<boolean>(false)
 
   const router = useRouter()
@@ -54,7 +47,9 @@ export default function EditTitleForm({
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData,
+    defaultValues: {
+      price: initialData?.price || undefined,
+    },
   })
 
   const { isSubmitting, isValid } = form.formState
@@ -64,14 +59,14 @@ export default function EditTitleForm({
       await axios.patch(`/api/courses/${courseId}`, values)
       toast({
         title: 'Success',
-        description: 'Course title edited successfully',
+        description: 'Course price edited successfully',
         variant: 'default',
       })
       router.refresh()
     } catch {
       toast({
         title: 'Error',
-        description: 'Failed to edit title',
+        description: 'Failed to edit price',
         variant: 'destructive',
       })
     }
@@ -80,21 +75,23 @@ export default function EditTitleForm({
   return (
     <div className="mt-6 border bg-white rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Course title
+        Course price
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="ghost">
               <>
                 <Pencil className="h-4 w-4 mr-2" />
-                Edit title
+                {(initialData.price && 'Edit price') || 'Put your price'}
               </>
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Edit Title</DialogTitle>
+              <DialogTitle>
+                {(initialData.price && 'Edit topic') || 'Put your price'}
+              </DialogTitle>
               <DialogDescription>
-                Now, you can edit your title!
+                Provide a reasonable price for your course
               </DialogDescription>
             </DialogHeader>
             <Form {...form}>
@@ -104,13 +101,13 @@ export default function EditTitleForm({
               >
                 <FormField
                   control={form.control}
-                  name="title"
+                  name="price"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
                         <Input
                           disabled={isSubmitting}
-                          placeholder="e.g. 'Advanced web development'"
+                          placeholder="e.g. '$200.01'"
                           {...field}
                         />
                       </FormControl>
@@ -128,7 +125,16 @@ export default function EditTitleForm({
           </DialogContent>
         </Dialog>
       </div>
-      {!editing && <p className="text-sm mt-2">{initialData.title}</p>}
+      {!editing && (
+        <p
+          className={cn(
+            'text-sm mt-2',
+            !initialData.price && 'text-slate-500 italic'
+          )}
+        >
+          {initialData.price ? formatPrice(initialData.price) : 'No price'}
+        </p>
+      )}
     </div>
   )
 }

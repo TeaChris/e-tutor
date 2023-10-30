@@ -127,7 +127,7 @@ export default function Navbar() {
                       Create account
                     </Button>
                   </Link>
-                  <Link href="/sign-up">
+                  <Link href="/sign-in">
                     <Button variant={'default'}>Sign in</Button>
                   </Link>
                 </>

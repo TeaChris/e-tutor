@@ -21,8 +21,9 @@ export default function Home() {
             Our mission is to help people to find the best course online and
             learn with expert anytime, anywhere.
           </p>
-
-          <Button variant={'default'}>Create account</Button>
+          <Link href={`/sign-up`}>
+            <Button variant={'default'}>Create account</Button>
+          </Link>
         </div>
 
         {/* right --- image */}

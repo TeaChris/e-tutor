@@ -1,7 +1,7 @@
 import { IconBadge } from '@/components/IconBadge'
 import { db } from '@/lib/db'
 import { auth } from '@clerk/nextjs'
-import { LayoutDashboard, ListChecks } from 'lucide-react'
+import { CircleDollarSign, LayoutDashboard, ListChecks } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import EditTitleForm from './_components/EditTitleForm'
 import TopicForm from './_components/TopicForm'
@@ -10,6 +10,8 @@ import ImageForm from './_components/ImageForm'
 import LanguageForm from './_components/LanguageForm'
 import CourseLevelForm from './_components/CourseLevelForm'
 import DescriptionForm from './_components/DescriptionForm'
+import PriceForm from './_components/PriceForm'
+import SectionsForm from './_components/SectionsForm'
 
 export default async function CourseIdPage({
   params,
@@ -70,6 +72,8 @@ export default async function CourseIdPage({
     course.price,
     course.topic,
     course.categoryId,
+    course.languageId,
+    course.categoryId,
     course.sections.some((section) => section.isPublished),
   ]
 
@@ -128,9 +132,17 @@ export default async function CourseIdPage({
         <div className="space-y-6">
           <div>
             <div className="flex items-center gap-x-2">
-              <IconBadge icon={ListChecks} />
+              <IconBadge icon={CircleDollarSign} />
               <h2 className="text-xl">Course chapters</h2>
             </div>
+            <PriceForm initialData={course} courseId={course.id} />
+          </div>
+          <div>
+            <div className="flex items-center gap-x-2">
+              <IconBadge icon={ListChecks} />
+              <h2 className="text-xl">Sell your course</h2>
+            </div>
+            <SectionsForm initialData={course} courseId={course.id} />
           </div>
         </div>
       </div>
