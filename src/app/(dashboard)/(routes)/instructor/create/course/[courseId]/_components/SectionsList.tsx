@@ -83,7 +83,7 @@ export default function SectionList({
                   >
                     <div
                       className={cn(
-                        'px-2 cursor-move py-3 border-r border-r-slate-200 hover:bg-slate-300 rounded-l-md transition',
+                        'px-2 cursor-grab py-3 border-r border-r-slate-200 hover:bg-slate-300 rounded-l-md transition',
                         section.isPublished &&
                           'border-r-sky-200 hover:bg-sky-200'
                       )}

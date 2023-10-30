@@ -117,11 +117,11 @@ export default function SectionsForm({
     <div className="relative mt-6 border bg-white rounded-md p-4">
       {isUpdating && (
         <div className="absolute h-full w-full bg-slate-500/20 top-0 right-0 rounded-m flex items-center justify-center">
-          <Loader2 className="animate-spin h-6 w-6 text-sky-700" />
+          <Loader2 className="animate-spin h-6 w-6 text-orange-700" />
         </div>
       )}
       <div className="font-medium flex items-center justify-between">
-        Course chapters
+        Course sections
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="ghost">
@@ -171,7 +171,6 @@ export default function SectionsForm({
           </DialogContent>
         </Dialog>
       </div>
-      {/* {!isCreating && ( */}
       <div
         className={cn(
           'text-sm mt-2',
@@ -185,7 +184,6 @@ export default function SectionsForm({
           items={initialData.sections || []}
         />
       </div>
-      {/* )} */}
       {!isCreating && (
         <p className="text-xs text-muted-foreground mt-4">
           Drag and drop to reorder the chapters
