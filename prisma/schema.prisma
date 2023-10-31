@@ -31,6 +31,9 @@ model Course{
   courseLevelId      String?
   courseLevel        CourseLevel? @relation(fields: [languageId], references: [id])
 
+  courseDurationId   String?
+  courseDuration     CourseDuration? @relation(fields: [courseDurationId], references: [id])
+
   sections        Section[]
   attachments     Attachment[]
   purchases       Purchase[]
@@ -58,6 +61,12 @@ model CourseLevel {
   id         String @id @default(uuid()) @map("_id")
   name       String
   Courses    Course[]
+}
+
+model CourseDuration{
+  id        String @id @default(uuid()) @map("_id")
+  name      String
+  Courses   Course[]
 }
 
 model Section {

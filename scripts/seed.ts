@@ -95,6 +95,60 @@ async function seedCourseLevel() {
   }
 }
 
+async function courseDuration() {
+  const database = new PrismaClient()
+
+  try {
+    await database.$connect()
+
+    const duration = await database.courseDuration.findMany()
+
+    if (duration.length === 0) {
+      await database.courseDuration.createMany({
+        data: [
+          { name: '1 hour' },
+          { name: '2 hours' },
+          { name: '3 hours' },
+          { name: '4 hours' },
+          { name: '5 hours' },
+          { name: '6 hours' },
+          { name: '7 hours' },
+          { name: '8 hours' },
+          { name: '9 hours' },
+          { name: '10 hours' },
+          { name: '11 hours' },
+          { name: '12 hours' },
+          { name: '13 hours' },
+          { name: '14 hours' },
+          { name: '15 hours' },
+          { name: '16 hours' },
+          { name: '17 hours' },
+          { name: '18 hours' },
+          { name: '19 hours' },
+          { name: '20 hours' },
+          { name: '21 hours' },
+          { name: '22 hours' },
+          { name: '23 hours' },
+          { name: '24 hours' },
+          { name: '25 hours' },
+          { name: '26 hours' },
+          { name: '27 hours' },
+          { name: '28 hours' },
+          { name: '29 hours' },
+          { name: '30 hours' },
+        ],
+      })
+      console.log('duration seeding success')
+    } else {
+      console.log('duration already exist, skipping seeding.')
+    }
+  } catch (error) {
+    console.error('Error seeding the duration', error)
+  } finally {
+    await database.$disconnect()
+  }
+}
+
 async function main() {
   await seedCategories()
   await seedLanguages()
