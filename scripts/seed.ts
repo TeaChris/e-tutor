@@ -153,6 +153,7 @@ async function main() {
   await seedCategories()
   await seedLanguages()
   await seedCourseLevel()
+  await courseDuration()
 }
 
 main()
