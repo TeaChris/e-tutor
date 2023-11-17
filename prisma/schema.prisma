@@ -16,22 +16,23 @@ model Course{
   id              String @id @default(uuid()) @map("_id")
   userId          String
   title           String
-  topic           String?
+  topic           String
+  subtitle        String
   description     String?
   imageUrl        String?
   price           Float?
   isPublished     Boolean @default(false)
 
-  categoryId      String?
+  categoryId      String
   category        Category? @relation(fields: [categoryId], references: [id])
 
-  languageId      String?
+  languageId      String
   language        Language? @relation(fields: [languageId], references: [id])
 
-  courseLevelId      String?
+  courseLevelId      String
   courseLevel        CourseLevel? @relation(fields: [languageId], references: [id])
 
-  courseDurationId   String?
+  courseDurationId   String
   courseDuration     CourseDuration? @relation(fields: [courseDurationId], references: [id])
 
   sections        Section[]

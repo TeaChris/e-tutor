@@ -1,3 +1,11 @@
+import {
+  ClipboardList,
+  Layers,
+  LucideIcon,
+  MonitorPlay,
+  PlayCircle,
+} from 'lucide-react'
+
 type Categories = {
   id: string
   title: string
@@ -327,5 +335,34 @@ export const instructor: Instructor = [
     position: 'Lead Developer',
     rating: '4.2',
     studentNo: '2,711',
+  },
+]
+
+type Tabs = {
+  icon: LucideIcon
+  label: string
+  id: number
+}[]
+
+export const tabs: Tabs = [
+  {
+    icon: Layers,
+    label: 'Basic Information',
+    id: 1,
+  },
+  {
+    icon: ClipboardList,
+    label: 'Advanced Information',
+    id: 2,
+  },
+  {
+    icon: MonitorPlay,
+    label: 'Curriculum',
+    id: 3,
+  },
+  {
+    icon: PlayCircle,
+    label: 'Publish Course',
+    id: 4,
   },
 ]
