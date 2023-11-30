@@ -9,7 +9,6 @@ import {
   FormItem,
 } from '@/components/ui/form'
 
-import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { z } from 'zod'
@@ -17,15 +16,14 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { useToast } from '@/components/ui/use-toast'
-import { useState } from 'react'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { Label } from '@/components/ui/label'
 import { Combobox } from '@/components/ui/combobox'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 interface BasicInfoProps {
   options: { label: string; value: string }[]
-  level: { label: string; value: string }[]
+  levels: { label: string; value: string }[]
   languages: { label: string; value: string }[]
   durations: { label: string; value: string }[]
 }
@@ -56,14 +54,10 @@ const formSchema = z.object({
 
 export default function BasicInfo({
   options,
-  level,
+  levels,
   languages,
   durations,
 }: BasicInfoProps) {
-  const [editing, setEditing] = useState<boolean>(false)
-
-  const router = useRouter()
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -79,16 +73,19 @@ export default function BasicInfo({
 
   const { isSubmitting, isValid } = form.formState
   const { toast } = useToast()
+  const router = useRouter()
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await axios.post('/api/course', values)
+      const response = await axios.post('/api/create', values)
       toast({
         title: 'Success',
         description:
-          "Your course was successfully created, proceed to 'Advanced Infomation Tab`",
+          "Your course was successfully created, proceed to 'Advanced Information Tab`",
         variant: 'default',
       })
+      form.reset()
+      router.push(`/instructor/create/${response.data.id}`)
     } catch {
       toast({
         title: 'Error',
@@ -97,14 +94,15 @@ export default function BasicInfo({
       })
     }
   }
+
   return (
     <div className="w-full h-full p-2 flex flex-col items-start gap-0">
-      <div className="w-full h-[9%] flex items-center justify-start border-b border-neutral-200">
+      <div className="w-full h-[9%] flex items-center justify-between">
         <h4 className="text-xl text-black font-semibold">Basic Information</h4>
       </div>
 
       <div className="h-[91%] w-full flex flex-col items-start gap-3">
-        <ScrollArea className="w-full h-[99%]">
+        <ScrollArea className="w-full h-[99%] pt-10s">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
@@ -243,7 +241,7 @@ export default function BasicInfo({
                           >
                             Level
                           </FormLabel>
-                          <Combobox options={...level} {...field} />
+                          <Combobox options={...levels} {...field} />
                         </div>
                       </FormControl>
                       <FormMessage />

@@ -1,8 +1,8 @@
 import { auth } from '@clerk/nextjs'
 import { redirect } from 'next/navigation'
 
-import CourseTabs from './_component/CourseTabs'
 import { db } from '@/lib/db'
+import BasicInfo from './_component/BasicInfo'
 
 interface CreateProps {}
 
@@ -40,7 +40,7 @@ export default async function Create({}: CreateProps) {
   return (
     <div className="w-full h-full flex items-center justify-center">
       <div className="w-[85%] h-[85%] bg-white rounded-sm flex flex-col items-start gap-0">
-        <CourseTabs
+        <BasicInfo
           options={categories.map((category) => ({
             label: category.name,
             value: category.id,
@@ -61,4 +61,25 @@ export default async function Create({}: CreateProps) {
       </div>
     </div>
   )
+}
+
+{
+  /* <CourseTabs
+          options={categories.map((category) => ({
+            label: category.name,
+            value: category.id,
+          }))}
+          levels={courseLevels.map((level) => ({
+            label: level.name,
+            value: level.id,
+          }))}
+          languages={courseLanguage.map((language) => ({
+            label: language.name,
+            value: language.id,
+          }))}
+          durations={courseDuration.map((duration) => ({
+            label: duration.name,
+            value: duration.id,
+          }))}
+        /> */
 }
