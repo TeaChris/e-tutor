@@ -17,7 +17,7 @@ export default function Editor({ onChange, value }: EditorProps) {
   )
 
   return (
-    <div className="bg-white">
+    <div className="bg-white w-full">
       <ReactQuill theme="snow" value={value} onChange={onChange} />
     </div>
   )

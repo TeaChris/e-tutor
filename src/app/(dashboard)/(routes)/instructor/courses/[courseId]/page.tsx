@@ -3,6 +3,7 @@ import { auth } from '@clerk/nextjs'
 import { redirect } from 'next/navigation'
 import { db } from '@/lib/db'
 import ImageForm from '../_components/ImageForm'
+import DescriptionForm from '../_components/DecriptionForm'
 
 export default async function CourseId({
   params,
@@ -42,6 +43,11 @@ export default async function CourseId({
                 <div className="w-[48%] h-full p-3">
                   <ImageForm initialData={course} courseId={course.id} />
                 </div>
+              </div>
+
+              {/* bottom */}
+              <div className="w-full h-fit flex flex-col items-start gap-3">
+                <DescriptionForm initialData={course} courseId={course.id} />
               </div>
             </div>
           </ScrollArea>
