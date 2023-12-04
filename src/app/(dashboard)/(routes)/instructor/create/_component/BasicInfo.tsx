@@ -77,15 +77,15 @@ export default function BasicInfo({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await axios.post('/api/create', values)
+      const response = await axios.post('/api/courses', values)
       toast({
         title: 'Success',
         description:
-          "Your course was successfully created, proceed to 'Advanced Information Tab`",
+          "Your course was successfully created, you'll be redirected to thw 'Advanced Information page`",
         variant: 'default',
       })
       form.reset()
-      router.push(`/instructor/create/${response.data.id}`)
+      router.push(`/instructor/courses/${response.data.id}`)
     } catch {
       toast({
         title: 'Error',
@@ -102,7 +102,7 @@ export default function BasicInfo({
       </div>
 
       <div className="h-[91%] w-full flex flex-col items-start gap-3">
-        <ScrollArea className="w-full h-[99%] pt-10s">
+        <ScrollArea className="w-full h-[99%] pt-10">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}

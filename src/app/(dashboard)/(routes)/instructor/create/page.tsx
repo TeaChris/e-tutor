@@ -62,24 +62,3 @@ export default async function Create({}: CreateProps) {
     </div>
   )
 }
-
-{
-  /* <CourseTabs
-          options={categories.map((category) => ({
-            label: category.name,
-            value: category.id,
-          }))}
-          levels={courseLevels.map((level) => ({
-            label: level.name,
-            value: level.id,
-          }))}
-          languages={courseLanguage.map((language) => ({
-            label: language.name,
-            value: language.id,
-          }))}
-          durations={courseDuration.map((duration) => ({
-            label: duration.name,
-            value: duration.id,
-          }))}
-        /> */
-}
