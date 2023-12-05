@@ -109,8 +109,13 @@ export default function CourseCurriculum({
   }
 
   return (
-    <div className="w-full h-fit flex flex-col items-start gap-2 pb-4">
+    <div className="w-full h-fit min-h-max flex flex-col items-start gap-2 pb-4 relative">
       <h3 className="text-sm text-black font-semibold">Course description</h3>
+      {updating && (
+        <div className="absolute h-full w-full bg-slate-500/20 top-0 right-0 rounded-m flex items-center justify-center">
+          <Loader2 className="animate-spin h-6 w-6 text-orange-600" />
+        </div>
+      )}
       <div className="w-full h-fit flex flex-col items-start gap-2 bg-neutral-200 rounded-sm p-2">
         <div className="w-full h-8 flex items-center justify-between">
           <div className="h-full w-fit flex items-center gap-2">
@@ -197,9 +202,11 @@ export default function CourseCurriculum({
       </div>
 
       {!creating && (
-        <p className="text-xs text-muted-foreground mt-4">
-          Drag and drop to reorder the sections
-        </p>
+        <div className="w-full px-2">
+          <p className="text-xs text-muted-foreground mt-4">
+            Drag and drop to reorder the sections
+          </p>
+        </div>
       )}
     </div>
   )
