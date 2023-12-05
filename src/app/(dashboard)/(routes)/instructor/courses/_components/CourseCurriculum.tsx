@@ -26,6 +26,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import SectionList from './SectionList'
 
 interface CourseCurriculum {
   initialData: Course & { sections: Section[] }
@@ -77,6 +78,34 @@ export default function CourseCurriculum({
         variant: 'destructive',
       })
     }
+  }
+
+  const onReorder = async (updateData: { id: string; position: number }[]) => {
+    try {
+      setUpdating(true)
+
+      await axios.put(`/api/courses/${courseId}/sections/reorder`, {
+        list: updateData,
+      })
+      toast({
+        title: 'Success',
+        description: 'Section reordered successfully',
+        variant: 'default',
+      })
+      router.refresh()
+    } catch {
+      toast({
+        title: 'Success',
+        description: 'Something went wrong, please try again',
+        variant: 'destructive',
+      })
+    } finally {
+      setUpdating(false)
+    }
+  }
+
+  const onEdit = (id: string) => {
+    router.push(`/teacher/courses/${courseId}/sections/${id}`)
   }
 
   return (
@@ -149,16 +178,24 @@ export default function CourseCurriculum({
           </div>
         </div>
       </div>
-      {!creating && (
-        <div
-          className={cn(
-            'text-sm mt-2',
-            !initialData.sections.length && 'text-neutral-500 italic'
-          )}
-        >
-          {!initialData.sections.length && 'No Sections'}
-        </div>
-      )}
+      <div className="w-full px-4">
+        {!creating && (
+          <div
+            className={cn(
+              'text-sm mt-2',
+              !initialData.sections.length && 'text-neutral-500 italic w-full'
+            )}
+          >
+            {!initialData.sections.length && 'No Sections'}
+            <SectionList
+              onEdit={onEdit}
+              onReorder={onReorder}
+              items={initialData.sections || []}
+            />
+          </div>
+        )}
+      </div>
+
       {!creating && (
         <p className="text-xs text-muted-foreground mt-4">
           Drag and drop to reorder the sections
