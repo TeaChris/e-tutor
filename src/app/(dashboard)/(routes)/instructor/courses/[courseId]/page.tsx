@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 import { db } from '@/lib/db'
 import ImageForm from '../_components/ImageForm'
 import DescriptionForm from '../_components/DecriptionForm'
+import CourseCurriculum from '../_components/CourseCurriculum'
 
 export default async function CourseId({
   params,
@@ -20,6 +21,13 @@ export default async function CourseId({
     where: {
       id: params.courseId,
       userId,
+    },
+    include: {
+      sections: {
+        orderBy: {
+          position: 'asc',
+        },
+      },
     },
   })
 
@@ -48,6 +56,10 @@ export default async function CourseId({
               {/* bottom */}
               <div className="w-full h-fit flex flex-col items-start gap-3">
                 <DescriptionForm initialData={course} courseId={course.id} />
+              </div>
+              <div className="w-full h-fit flex flex-col items-start gap-3">
+                {/* @ts-ignore */}
+                <CourseCurriculum initialData={course} courseId={course.id} />
               </div>
             </div>
           </ScrollArea>

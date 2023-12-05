@@ -79,7 +79,8 @@ export default function DescriptionForm({
           <div className="flex items-center gap-x-2 mt-2">
             <Button
               className="w-full flex"
-              disabled={!isValid || isSubmitting}
+              // @ts-ignore
+              disabled={!isValid || isSubmitting || initialData}
               type="submit"
             >
               {isSubmitting ? (
