@@ -49,7 +49,7 @@ export default function SectionAccessForm({
     defaultValues: {
       isFree: !!initialData.isFree,
     },
-  })
+  }) 
 
   const { isSubmitting, isValid } = form.formState
 
