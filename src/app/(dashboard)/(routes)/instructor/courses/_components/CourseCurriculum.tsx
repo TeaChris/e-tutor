@@ -105,7 +105,7 @@ export default function CourseCurriculum({
   }
 
   const onEdit = (id: string) => {
-    router.push(`/teacher/courses/${courseId}/sections/${id}`)
+    router.push(`/instructor/courses/${courseId}/sections/${id}`)
   }
 
   return (
