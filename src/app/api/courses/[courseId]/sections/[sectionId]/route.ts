@@ -8,6 +8,87 @@ const { Video } = new Mux(
   process.env.MUX_TOKEN_SECRET!
 )
 
+export async function DELETE(
+  req: Request,
+  { params }: { params: { courseId: string; sectionId: string } }
+) {
+  try {
+    const { userId } = auth()
+
+    if (!userId) {
+      return new NextResponse('Unauthorized', { status: 401 })
+    }
+
+    const ownCourse = await db.course.findUnique({
+      where: {
+        id: params.courseId,
+        userId,
+      },
+    })
+
+    if (!ownCourse) {
+      return new NextResponse('Unauthorized', { status: 401 })
+    }
+
+    const section = await db.section.findUnique({
+      where: {
+        id: params.sectionId,
+        courseId: params.courseId,
+      },
+    })
+
+    if (!section) {
+      return new NextResponse('Not Found', { status: 404 })
+    }
+
+    if (section.videoUrl) {
+      const existingMuxData = await db.muxData.findFirst({
+        where: {
+          sectionId: params.sectionId,
+        },
+      })
+
+      if (existingMuxData) {
+        await Video.Assets.del(existingMuxData.assetId)
+        await db.muxData.delete({
+          where: {
+            id: existingMuxData.id,
+          },
+        })
+      }
+    }
+
+    const deletedSection = await db.section.delete({
+      where: {
+        id: params.sectionId,
+      },
+    })
+
+    const publishedSectionsInCourse = await db.section.findMany({
+      where: {
+        courseId: params.courseId,
+        isPublished: true,
+      },
+    })
+
+    if (!publishedSectionsInCourse.length) {
+      await db.course.update({
+        where: {
+          id: params.courseId,
+        },
+        data: {
+          isPublished: false,
+        },
+      })
+    }
+
+    return NextResponse.json(deletedSection)
+  } catch (error) {
+    console.log('[SECTION_ID_DELETE]', error)
+    return new NextResponse('Internal Error', { status: 500 })
+  }
+}
+
 export async function PATCH(
   req: Request,
   { params }: { params: { courseId: string; sectionId: string } }

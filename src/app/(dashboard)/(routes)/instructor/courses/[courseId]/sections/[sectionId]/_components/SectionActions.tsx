@@ -2,7 +2,7 @@
 
 import { ConfirmModal } from '@/components/modals/ConfirmModal'
 import { Button } from '@/components/ui/button'
-import { Trash } from 'lucide-react'
+import { Loader2, Trash } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import axios from 'axios'
@@ -32,7 +32,7 @@ export default function SectionActions({
 
       if (isPublished) {
         await axios.patch(
-          `/api/courses/${courseId}/chapters/${sectionId}/unpublish`
+          `/api/courses/${courseId}/sections/${sectionId}/unpublish`
         )
         toast({
           title: 'Success',
@@ -41,7 +41,7 @@ export default function SectionActions({
         })
       } else {
         await axios.patch(
-          `/api/courses/${courseId}/chapters/${sectionId}/publish`
+          `/api/courses/${courseId}/sections/${sectionId}/publish`
         )
         toast({
           title: 'Success',
@@ -66,15 +66,15 @@ export default function SectionActions({
     try {
       setIsLoading(true)
 
-      await axios.delete(`/api/courses/${courseId}/chapters/${sectionId}`)
+      await axios.delete(`/api/courses/${courseId}/sections/${sectionId}`)
 
       toast({
         title: 'Success',
-        description: 'Your course section was updated successfully',
+        description: 'Your course section was deleted successfully',
         variant: 'default',
       })
       router.refresh()
-      router.push(`/teacher/courses/${courseId}`)
+      router.push(`/instructor/courses/${courseId}`)
     } catch {
       toast({
         title: 'Error',
@@ -97,7 +97,11 @@ export default function SectionActions({
       </Button>
       <ConfirmModal onConfirm={onDelete}>
         <Button size="sm" disabled={isLoading}>
-          <Trash className="h-4 w-4" />
+          {isLoading ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <Trash className="h-4 w-4" />
+          )}
         </Button>
       </ConfirmModal>
     </div>
