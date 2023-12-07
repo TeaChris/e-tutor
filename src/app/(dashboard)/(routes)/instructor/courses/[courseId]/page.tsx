@@ -5,6 +5,7 @@ import { db } from '@/lib/db'
 import ImageForm from '../_components/ImageForm'
 import DescriptionForm from '../_components/DecriptionForm'
 import CourseCurriculum from '../_components/CourseCurriculum'
+import PriceForm from '../_components/PriceForm'
 
 export default async function CourseId({
   params,
@@ -50,6 +51,9 @@ export default async function CourseId({
               <div className="w-full h-60 border-b p-2 border-neutral-200 flex items-start gap-[2%]">
                 <div className="w-[48%] h-full p-3">
                   <ImageForm initialData={course} courseId={course.id} />
+                </div>
+                <div className="w-[48%] h-full p-3">
+                  <PriceForm initialData={course} courseId={course.id} />
                 </div>
               </div>
 

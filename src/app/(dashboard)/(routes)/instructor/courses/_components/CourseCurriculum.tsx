@@ -116,7 +116,7 @@ export default function CourseCurriculum({
           <Loader2 className="animate-spin h-6 w-6 text-orange-600" />
         </div>
       )}
-      <div className="w-full h-fit flex flex-col items-start gap-2 bg-neutral-200 rounded-sm p-2">
+      <div className="w-full h-fit flex flex-col items-start gap-2 bg-slate-100 rounded-sm p-2">
         <div className="w-full h-8 flex items-center justify-between">
           <div className="h-full w-fit flex items-center gap-2">
             <AlignJustify className="w-4 h-4 text-black" />
