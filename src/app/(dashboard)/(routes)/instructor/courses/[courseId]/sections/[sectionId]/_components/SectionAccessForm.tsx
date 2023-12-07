@@ -4,7 +4,7 @@ import * as z from 'zod'
 import axios from 'axios'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { Pencil } from 'lucide-react'
+import { Loader2, Pencil } from 'lucide-react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Section } from '@prisma/client'
@@ -49,7 +49,7 @@ export default function SectionAccessForm({
     defaultValues: {
       isFree: !!initialData.isFree,
     },
-  }) 
+  })
 
   const { isSubmitting, isValid } = form.formState
 
@@ -132,7 +132,11 @@ export default function SectionAccessForm({
             />
             <div className="flex items-center gap-x-2">
               <Button disabled={!isValid || isSubmitting} type="submit">
-                Save
+                {isSubmitting ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <>Save</>
+                )}
               </Button>
             </div>
           </form>

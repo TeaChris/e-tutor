@@ -36,7 +36,7 @@ export default function SectionActions({
         )
         toast({
           title: 'Success',
-          description: 'Your course section was updated successfully',
+          description: 'Your course section was unpublished',
           variant: 'default',
         })
       } else {
@@ -45,7 +45,7 @@ export default function SectionActions({
         )
         toast({
           title: 'Success',
-          description: 'Your course section was updated successfully',
+          description: 'Your course section was published successfully',
           variant: 'default',
         })
       }
