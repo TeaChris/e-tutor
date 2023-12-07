@@ -37,7 +37,7 @@ export const SectionVideoForm = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(
-        `/api/courses/${courseId}/chapters/${sectionId}`,
+        `/api/courses/${courseId}/sections/${sectionId}`,
         values
       )
       toast({
@@ -97,7 +97,7 @@ export const SectionVideoForm = ({
             }}
           />
           <div className="text-xs text-muted-foreground mt-4">
-            Upload this chapter&apos;s video
+            Upload this section&apos;s video
           </div>
         </div>
       )}

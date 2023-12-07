@@ -4,7 +4,7 @@ import * as z from 'zod'
 import axios from 'axios'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { Pencil } from 'lucide-react'
+import { Pencil, Loader2 } from 'lucide-react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Section } from '@prisma/client'
@@ -56,7 +56,7 @@ export default function SectionDescriptionForm({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(
-        `/api/courses/${courseId}/chapters/${sectionId}`,
+        `/api/courses/${courseId}/sections/${sectionId}`,
         values
       )
       toast({
@@ -78,7 +78,7 @@ export default function SectionDescriptionForm({
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Chapter description
+        Section description
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
             <>Cancel</>
@@ -123,7 +123,11 @@ export default function SectionDescriptionForm({
             />
             <div className="flex items-center gap-x-2">
               <Button disabled={!isValid || isSubmitting} type="submit">
-                Save
+                {isSubmitting ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <>Save</>
+                )}
               </Button>
             </div>
           </form>

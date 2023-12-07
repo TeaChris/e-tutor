@@ -66,7 +66,7 @@ export default async function Page({
             </Link>
             <div className="flex items-center justify-between w-full">
               <div className="flex flex-col gap-y-2">
-                <h1 className="text-2xl font-medium">section Creation</h1>
+                <h1 className="text-2xl font-medium">Section Creation</h1>
                 <span className="text-sm text-slate-700">
                   Complete all fields {completionText}
                 </span>

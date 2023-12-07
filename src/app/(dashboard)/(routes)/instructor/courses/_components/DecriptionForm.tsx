@@ -80,7 +80,7 @@ export default function DescriptionForm({
             <Button
               className="w-full flex"
               // @ts-ignore
-              disabled={!isValid || isSubmitting || initialData}
+              disabled={!isValid || isSubmitting}
               type="submit"
             >
               {isSubmitting ? (
