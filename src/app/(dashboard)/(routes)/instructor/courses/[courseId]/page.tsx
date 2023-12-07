@@ -6,6 +6,8 @@ import ImageForm from '../_components/ImageForm'
 import DescriptionForm from '../_components/DecriptionForm'
 import CourseCurriculum from '../_components/CourseCurriculum'
 import PriceForm from '../_components/PriceForm'
+import Banner from '@/components/Banner'
+import Actions from '../_components/Actions'
 
 export default async function CourseId({
   params,
@@ -36,37 +38,58 @@ export default async function CourseId({
     return redirect('/')
   }
 
+  const requiredFields = [
+    course.description,
+    course.imageUrl,
+    course.price,
+    course.sections.some((section) => section.isPublished),
+  ]
+
+  const isComplete = requiredFields.every(Boolean)
+
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="w-[85%] h-[95%] bg-white rounded-sm flex flex-col items-start gap-0">
-        <div className="w-full h-full p-2 flex flex-col items-start gap-0">
-          <div className="w-full h-[9%] flex items-center justify-between">
-            <h4 className="text-xl text-black font-semibold">
-              Advanced Information
-            </h4>
-          </div>
+    <div className="w-full h-full flex flex-col items-start gap-4">
+      <div className="w-full h-[10%]">
+        <Banner label="Unpublished Course: This course will not be visible to the students" />
+      </div>
 
-          <ScrollArea className="w-full h-[99%]">
-            <div className="h-[91%] w-full flex flex-col items-start gap-3">
-              <div className="w-full h-60 border-b p-2 border-neutral-200 flex items-start gap-[2%]">
-                <div className="w-[48%] h-full p-3">
-                  <ImageForm initialData={course} courseId={course.id} />
-                </div>
-                <div className="w-[48%] h-full p-3">
-                  <PriceForm initialData={course} courseId={course.id} />
-                </div>
-              </div>
+      <div className="w-full h-[90%] flex items-center justify-center">
+        <div className="w-[85%] h-full bg-white rounded-sm flex flex-col items-start gap-0">
+          <div className="w-full h-full p-2 flex flex-col items-start gap-0">
+            <div className="w-full h-[9%] flex items-center justify-between">
+              <h4 className="text-xl text-black font-semibold">
+                Advanced Information
+              </h4>
 
-              {/* bottom */}
-              <div className="w-full h-fit flex flex-col items-start gap-3">
-                <DescriptionForm initialData={course} courseId={course.id} />
-              </div>
-              <div className="w-full h-fit flex flex-col items-start gap-3">
-                {/* @ts-ignore */}
-                <CourseCurriculum initialData={course} courseId={course.id} />
-              </div>
+              <Actions
+                courseId={params.courseId}
+                disabled={isComplete}
+                isPublished={course.isPublished}
+              />
             </div>
-          </ScrollArea>
+
+            <ScrollArea className="w-full h-[99%]">
+              <div className="h-[91%] w-full flex flex-col items-start gap-3">
+                <div className="w-full h-60 border-b p-2 border-neutral-200 flex items-start gap-[2%]">
+                  <div className="w-[48%] h-full p-3">
+                    <ImageForm initialData={course} courseId={course.id} />
+                  </div>
+                  <div className="w-[48%] h-full p-3">
+                    <PriceForm initialData={course} courseId={course.id} />
+                  </div>
+                </div>
+
+                {/* bottom */}
+                <div className="w-full h-fit flex flex-col items-start gap-3">
+                  <DescriptionForm initialData={course} courseId={course.id} />
+                </div>
+                <div className="w-full h-fit flex flex-col items-start gap-3">
+                  {/* @ts-ignore */}
+                  <CourseCurriculum initialData={course} courseId={course.id} />
+                </div>
+              </div>
+            </ScrollArea>
+          </div>
         </div>
       </div>
     </div>
