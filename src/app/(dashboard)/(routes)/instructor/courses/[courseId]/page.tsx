@@ -49,9 +49,11 @@ export default async function CourseId({
 
   return (
     <div className="w-full h-full flex flex-col items-start gap-4">
-      <div className="w-full h-[10%]">
-        <Banner label="Unpublished Course: This course will not be visible to the students" />
-      </div>
+      {!course.isPublished && (
+        <div className="w-full h-[10%]">
+          <Banner label="Unpublished Course: This course will not be visible to the students" />
+        </div>
+      )}
 
       <div className="w-full h-[90%] flex items-center justify-center">
         <div className="w-[85%] h-full bg-white rounded-sm flex flex-col items-start gap-0">
