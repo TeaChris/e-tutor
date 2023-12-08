@@ -63,7 +63,7 @@ export default async function CourseId({
 
               <Actions
                 courseId={params.courseId}
-                disabled={isComplete}
+                disabled={!isComplete}
                 isPublished={course.isPublished}
               />
             </div>
