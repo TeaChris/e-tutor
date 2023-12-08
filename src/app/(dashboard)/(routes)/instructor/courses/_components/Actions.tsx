@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import axios from 'axios'
 import { useToast } from '@/components/ui/use-toast'
+import { useConfettiStore } from '@/hooks/use-confetti-store'
 
 interface ActionsProps {
   disabled: boolean
@@ -23,6 +24,7 @@ export default function Actions({
 
   const router = useRouter()
   const { toast } = useToast()
+  const confetti = useConfettiStore()
 
   const onClick = async () => {
     try {
@@ -42,6 +44,7 @@ export default function Actions({
           description: 'Your course was published successfully',
           variant: 'default',
         })
+        confetti.onOpen()
       }
 
       router.refresh()

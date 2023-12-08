@@ -3,8 +3,8 @@ import '@/styles/globals.css'
 import localFont from 'next/font/local'
 import React from 'react'
 import { ClerkProvider } from '@clerk/nextjs'
-import ToastProvider from '@/providers/ToastProvider'
 import { Toaster } from '@/components/ui/toaster'
+import { ConfettiProvider } from '@/providers/ConfettiProvider'
 
 const nun = localFont({
   src: '../../public/fonts/nunito.ttf',
@@ -29,7 +29,7 @@ export default function RootLayout({
           className={`w-screen bg-neutral-200 overflow-x-hidden ${nun.className}`}
         >
           <div className="w-full h-full">
-            <ToastProvider />
+            <ConfettiProvider />
             {children}
             <Toaster />
           </div>
