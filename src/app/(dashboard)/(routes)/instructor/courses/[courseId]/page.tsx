@@ -55,7 +55,7 @@ export default async function CourseId({
         </div>
       )}
 
-      <div className="w-full h-[90%] flex items-center justify-center">
+      <div className="w-full h-[90%] flex items-center justify-center mt-4">
         <div className="w-[85%] h-full bg-white rounded-sm flex flex-col items-start gap-0">
           <div className="w-full h-full p-2 flex flex-col items-start gap-0">
             <div className="w-full h-[9%] flex items-center justify-between">

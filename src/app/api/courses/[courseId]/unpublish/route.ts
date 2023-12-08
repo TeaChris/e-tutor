@@ -18,48 +18,25 @@ export async function PATCH(
         id: params.courseId,
         userId,
       },
-      include: {
-        sections: {
-          include: {
-            muxData: true,
-          },
-        },
-      },
     })
 
     if (!course) {
       return new NextResponse('Not Found', { status: 404 })
     }
 
-    const hasPublishedSection = course.sections.some(
-      (section) => section.isPublished
-    )
-
-    if (
-      !course.title ||
-      !course.categoryId ||
-      !course.description ||
-      !course.imageUrl ||
-      !course.price ||
-      !course.topic ||
-      !hasPublishedSection
-    ) {
-      return new NextResponse('Missing required fields', { status: 401 })
-    }
-
-    const publishedCourse = await db.course.update({
+    const unPublishedCourse = await db.course.update({
       where: {
         id: params.courseId,
         userId,
       },
       data: {
-        isPublished: true,
+        isPublished: false,
       },
     })
 
-    return NextResponse.json(publishedCourse)
+    return NextResponse.json(unPublishedCourse)
   } catch (error) {
-    console.log('[COURSE_ID_PUBLISH]', error)
+    console.log('[COURSE_ID_UNPUBLISH]', error)
     return new NextResponse('Internal Error', { status: 500 })
   }
 }
