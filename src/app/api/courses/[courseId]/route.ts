@@ -38,9 +38,9 @@ export async function DELETE(
       return new NextResponse('Not found', { status: 404 })
     }
 
-    for (const chapter of course.sections) {
-      if (chapter.muxData?.assetId) {
-        await Video.Assets.del(chapter.muxData.assetId)
+    for (const section of course.sections) {
+      if (section.muxData?.assetId) {
+        await Video.Assets.del(section.muxData.assetId)
       }
     }
 
