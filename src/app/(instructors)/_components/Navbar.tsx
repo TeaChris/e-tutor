@@ -4,8 +4,6 @@ import { usePathname } from 'next/navigation'
 
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import MobileSidebar from './MobileSidebar'
-import { Input } from '@/components/ui/input'
-import { Search } from 'lucide-react'
 import { UserButton } from '@clerk/nextjs'
 
 type Route = {
@@ -53,14 +51,6 @@ export default function Navbar() {
           </h4>
         </div>
         <div className="w-fit flex items-center gap-4">
-          <div className="w-60 h-8 relative">
-            <Input
-              type="search"
-              className="w-full h-full pl-6"
-              placeholder="enter your search"
-            />
-            <Search className="h-4 w-4 top-2 left-2 absolute" />
-          </div>
           <UserButton afterSignOutUrl="/" />
         </div>
       </MaxWidthWrapper>
