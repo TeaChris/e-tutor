@@ -1,18 +1,20 @@
-import Footer from '@/components/Footer'
-import Navbar from '@/components/Navbar'
+import Navbar from './_components/Navbar'
+import Sidebar from './_components/Sidebar'
 
-export default function CoursesLayout({
+export default function StudentsLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <div className={`w-screen bg-neutral-200 overflow-x-hidden`}>
-      <div className="w-full h-full">
+    <div className="h-full">
+      <div className="h-[80px] md:pl-56 fixed inset-y-0 w-full z-50">
         <Navbar />
-        {children}
-        <Footer />
       </div>
+      <div className="hidden md:flex h-full w-56 flex-col fixed inset-y-0 z-50">
+        <Sidebar />
+      </div>
+      <main className="md:pl-56 pt-[80px] h-full">{children}</main>
     </div>
   )
 }
