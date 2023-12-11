@@ -1,6 +1,5 @@
 import FileUpload from '@/components/FileUpload'
 import axios from 'axios'
-import { ImageIcon } from 'lucide-react'
 import { z } from 'zod'
 import { useToast } from '@/components/ui/use-toast'
 
