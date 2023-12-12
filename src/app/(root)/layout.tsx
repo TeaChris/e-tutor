@@ -7,12 +7,13 @@ export default function HomeLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className={`w-screen bg-neutral-200 overflow-x-hidden`}>
-      <div className="w-full h-full">
+    <div className={`w-screen h-screen bg-neutral-200 overflow-x-hidden`}>
+      <div className="w-full h-32">
         <Navbar />
-        {children}
-        <Footer />
       </div>
+      <div className="w-full">{children}</div>
+
+      <Footer />
     </div>
   )
 }
