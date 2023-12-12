@@ -89,9 +89,9 @@ export default function Home() {
         </MaxWidthWrapper>
       </section>
       <BestCourses />
-      <RecentCourses />
+      {/* <RecentCourses />
       <BecomeInstructor />
-      <Instructor />
+      <Instructor /> */}
     </main>
   )
 }

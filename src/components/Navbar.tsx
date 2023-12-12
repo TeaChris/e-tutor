@@ -10,7 +10,8 @@ import {
 import Image from 'next/image'
 import { Button } from './ui/button'
 import { UserButton, auth } from '@clerk/nextjs'
-import { PlusCircle } from 'lucide-react'
+import { Menu, PlusCircle } from 'lucide-react'
+import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
 
 type Nav = {
   label: string
@@ -24,8 +25,9 @@ const nav: Nav = [
   { label: 'Contact', href: '/contact' },
   { label: 'Become an Instructor', href: '/instructor' },
 ]
-export default function Navbar() {
+export default async function Navbar() {
   const { userId } = auth()
+
   return (
     <nav className="w-full bg-transparent flex flex-col items-start gap-0">
       {/* top nav */}
@@ -91,26 +93,23 @@ export default function Navbar() {
           </div>
           <div className="flex items-center gap-4 w-fit">
             <div className="w-fit flex items-center gap-3">
-              <Button variant={'ghost'}>
-                <Image
-                  src="/icons/bell.svg"
-                  alt="notification logo"
-                  width={20}
-                  height={20}
-                />
-              </Button>
-              <Button variant={'ghost'}>
-                <Image
-                  src="/icons/heart.svg"
-                  alt="notification logo"
-                  width={20}
-                  height={20}
-                />
-              </Button>
+              <div className="block lg:hidden">
+                <Sheet>
+                  <SheetTrigger asChild>
+                    <Button variant={'ghost'} className="text-slate-500">
+                      <Menu className="w-5 h-5" />
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent
+                    side={'left'}
+                    className="p-0 bg-white w-72"
+                  ></SheetContent>
+                </Sheet>
+              </div>
               <Button variant={'ghost'}>
                 <Image
                   src="/icons/cart.svg"
-                  alt="notification logo"
+                  alt="cart"
                   width={20}
                   height={20}
                 />
