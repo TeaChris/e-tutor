@@ -1,10 +1,10 @@
-import { db } from "@/lib/db";
-import { redirect } from "next/navigation";
+import { db } from '@/lib/db'
+import { redirect } from 'next/navigation'
 
 export default async function CourseIdPage({
-  params
+  params,
 }: {
-  params: { courseId: string; }
+  params: { courseId: string }
 }) {
   const course = await db.course.findUnique({
     where: {
@@ -16,15 +16,15 @@ export default async function CourseIdPage({
           isPublished: true,
         },
         orderBy: {
-          position: "asc"
-        }
-      }
-    }
-  });
+          position: 'asc',
+        },
+      },
+    },
+  })
 
   if (!course) {
-    return redirect("/");
+    return redirect('/')
   }
 
-  return redirect(`/courses/${course.id}/sections/${course.sections[0].id}`);
+  return <div>courseId</div>
 }
