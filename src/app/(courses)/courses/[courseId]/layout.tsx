@@ -3,16 +3,17 @@ import { redirect } from 'next/navigation'
 
 import { db } from '@/lib/db'
 import { getProgress } from '@/actions/get-progress'
-import CourseNavbar from './courses/[courseId]/_components/CourseNavbar'
-import CourseSidebar from './courses/[courseId]/_components/CourseSidebar'
+import CourseNavbar from './_components/CourseNavbar'
+import CourseSidebar from './_components/CourseSidebar'
 
-const CourseLayout = async ({
+
+export default async function CourseLayout({
   children,
   params,
 }: {
   children: React.ReactNode
   params: { courseId: string }
-}) => {
+}) {
   const { userId } = auth()
 
   if (!userId) {
@@ -60,5 +61,3 @@ const CourseLayout = async ({
     </div>
   )
 }
-
-export default CourseLayout
