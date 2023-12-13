@@ -26,5 +26,5 @@ export default async function CourseIdPage({
     return redirect('/')
   }
 
-  return <div>courseId</div>
+  return redirect(`/courses/${course.id}/sections/${course.sections[0].id}`)
 }
