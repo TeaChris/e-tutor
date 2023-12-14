@@ -3,12 +3,12 @@
 import axios from 'axios'
 import MuxPlayer from '@mux/mux-player-react'
 import { useState } from 'react'
-import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { Loader2, Lock } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { useConfettiStore } from '@/hooks/use-confetti-store'
+import { useToast } from '@/components/ui/use-toast'
 
 interface VideoPlayerProps {
   playbackId: string
@@ -32,6 +32,7 @@ export default function VideoPlayer({
   const [isReady, setIsReady] = useState<boolean>(false)
   const router = useRouter()
   const confetti = useConfettiStore()
+  const{toast}=useToast()
 
   const onEnd = async () => {
     try {
@@ -47,15 +48,22 @@ export default function VideoPlayer({
           confetti.onOpen()
         }
 
-        toast.success('Progress updated')
+        toast({
+          title:'Success',
+          description:'Progress Updated'
+        })
         router.refresh()
 
         if (nextSectionId) {
-          router.push(`/courses/${courseId}/chapters/${nextSectionId}`)
+          router.push(`/courses/${courseId}/sections/${nextSectionId}`)
         }
       }
     } catch {
-      toast.error('Something went wrong')
+      toast({
+        title: 'Success',
+        description: 'Something went wrong, please try again',
+        variant:'destructive'
+      })
     }
   }
 
