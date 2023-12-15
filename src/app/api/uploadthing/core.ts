@@ -7,8 +7,9 @@ const f = createUploadthing()
 
 const handleAuth = () => {
   const { userId } = auth()
+  const isAuthorized = isInstructor(userId)
 
-  if (!userId) throw new Error('Unauthorized')
+  if (!userId || !isAuthorized) throw new Error('Unauthorized')
   return { userId }
 }
 
