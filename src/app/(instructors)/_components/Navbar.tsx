@@ -4,7 +4,8 @@ import { usePathname } from 'next/navigation'
 
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import MobileSidebar from './MobileSidebar'
-import { UserButton } from '@clerk/nextjs'
+import { UserButton, useAuth } from '@clerk/nextjs'
+import { isInstructor } from '@/lib/instructor'
 
 type Route = {
   [key: string]: string
@@ -21,6 +22,7 @@ const route: Route = {
 
 export default function Navbar() {
   const pathname = usePathname()
+  const { userId } = useAuth()
 
   // send greetings based on the current time
   const getGreeting = () => {
@@ -50,9 +52,17 @@ export default function Navbar() {
             {title}
           </h4>
         </div>
-        <div className="w-fit flex items-center gap-4">
-          <UserButton afterSignOutUrl="/" />
-        </div>
+        {isInstructor(userId) ? (
+          <div className="w-fit flex items-center gap-4">
+            <span className="text-base font-semibold text-black">Teacher</span>
+            <UserButton afterSignOutUrl="/" />
+          </div>
+        ) : (
+          <div className="w-fit flex items-center gap-4">
+            <span className="text-base font-semibold text-black">Student</span>
+            <UserButton afterSignOutUrl="/" />
+          </div>
+        )}
       </MaxWidthWrapper>
     </div>
   )
