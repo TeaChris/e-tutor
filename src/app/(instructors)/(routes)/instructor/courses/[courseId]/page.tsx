@@ -82,7 +82,7 @@ export default async function CourseId({
                 </div>
 
                 {/* bottom */}
-                <div className="w-full h-fit flex flex-col items-start gap-3">
+                <div className="w-full h-44 flex items-start gap-3">
                   <DescriptionForm initialData={course} courseId={course.id} />
                 </div>
                 <div className="w-full h-fit flex flex-col items-start gap-3">
