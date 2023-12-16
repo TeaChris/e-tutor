@@ -8,6 +8,7 @@ import CourseCurriculum from '../_components/CourseCurriculum'
 import PriceForm from '../_components/PriceForm'
 import Banner from '@/components/Banner'
 import Actions from '../_components/Actions'
+import AttachmentForm from '../_components/AttachmentForm'
 
 export default async function CourseId({
   params,
@@ -29,6 +30,11 @@ export default async function CourseId({
       sections: {
         orderBy: {
           position: 'asc',
+        },
+      },
+      attachments: {
+        orderBy: {
+          createdAt: 'desc',
         },
       },
     },
@@ -88,6 +94,9 @@ export default async function CourseId({
                       initialData={course}
                       courseId={course.id}
                     />
+                  </div>
+                  <div className="w-[48%] h-full">
+                    <AttachmentForm initialData={course} courseId={course.id} />
                   </div>
                 </div>
                 <div className="w-full h-fit flex flex-col items-start gap-3">
