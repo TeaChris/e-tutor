@@ -24,6 +24,7 @@ export default function CoursesList({ items }: CoursesListProps) {
             sectionsLength={item.sections.length}
             price={item.price!}
             progress={item.progress!}
+            // @ts-ignore
             category={item?.category?.name}
           />
         ))}
