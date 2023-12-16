@@ -72,7 +72,7 @@ export default async function CourseId({
 
             <ScrollArea className="w-full h-[99%]">
               <div className="h-[91%] w-full flex flex-col items-start gap-3">
-                <div className="w-full h-60 border-b p-2 border-neutral-200 flex items-start gap-[2%]">
+                <div className="w-full h-fit lg:h-60 border-b p-2 border-neutral-200 flex flex-col lg:flex-row items-start gap-[2%]">
                   <div className="w-[48%] h-full p-3">
                     <ImageForm initialData={course} courseId={course.id} />
                   </div>
@@ -82,8 +82,13 @@ export default async function CourseId({
                 </div>
 
                 {/* bottom */}
-                <div className="w-full h-44 flex items-start gap-3">
-                  <DescriptionForm initialData={course} courseId={course.id} />
+                <div className="w-full h-fit lg:h-60 p-2 flex flex-col lg:flex-row items-start gap-[2%]">
+                  <div className="w-[48%] h-full">
+                    <DescriptionForm
+                      initialData={course}
+                      courseId={course.id}
+                    />
+                  </div>
                 </div>
                 <div className="w-full h-fit flex flex-col items-start gap-3">
                   {/* @ts-ignore */}

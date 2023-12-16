@@ -109,8 +109,7 @@ export default function CourseCurriculum({
   }
 
   return (
-    <div className="w-full h-fit min-h-max flex flex-col items-start gap-2 pb-4 relative">
-      <h3 className="text-sm text-black font-semibold">Course description</h3>
+    <div className="w-full h-fit min-h-max flex flex-col items-start gap-2 pb-4 relative mt-8">
       {updating && (
         <div className="absolute h-full w-full bg-slate-500/20 top-0 right-0 rounded-m flex items-center justify-center">
           <Loader2 className="animate-spin h-6 w-6 text-orange-600" />

@@ -61,7 +61,6 @@ export default function PriceForm({ initialData, courseId }: PriceFormProps) {
         description: 'Your course price was successfully added`',
         variant: 'default',
       })
-      toggleEdit()
       router.refresh()
     } catch {
       toast({

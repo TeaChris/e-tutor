@@ -2,7 +2,6 @@
 
 import Editor from '@/components/Editor'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
-import { Label } from '@/components/ui/label'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Course } from '@prisma/client'
 import axios from 'axios'
@@ -10,8 +9,18 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Button } from '@/components/ui/button'
-import { Loader2 } from 'lucide-react'
+import { Loader2, Pencil, PlusCircle } from 'lucide-react'
 import { useToast } from '@/components/ui/use-toast'
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import { cn } from '@/lib/utils'
 
 interface DescriptionFormProps {
   initialData: Course
@@ -59,39 +68,82 @@ export default function DescriptionForm({
   }
 
   return (
-    <div className="w-full h-fit flex flex-col items-start gap-2 border-b border-neutral-200 pb-4">
-      <Label htmlFor="description" className="text-sm text-black font-semibold">
+    <div className="mt-6 border bg-slate-100 rounded-md p-4 h-full">
+      <div className="font-medium flex items-center justify-between">
         Course description
-      </Label>
-      <Form {...form}>
-        <form className="w-full h-fit" onSubmit={form.handleSubmit(onSubmit)}>
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Editor {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <div className="flex items-center gap-x-2 mt-2">
-            <Button
-              className="w-full flex"
-              // @ts-ignore
-              disabled={!isValid || isSubmitting}
-              type="submit"
-            >
-              {isSubmitting ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
-              ) : (
-                <>Save</>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="ghost">
+              {!initialData.description && (
+                <>
+                  <PlusCircle className="h-4 w-4 mr-2" />
+                  Add description
+                </>
+              )}
+              {initialData.description && (
+                <>
+                  <Pencil className="h-4 w-4 mr-2" />
+                  Edit description
+                </>
               )}
             </Button>
-          </div>
-        </form>
-      </Form>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[500px]">
+            <DialogHeader>
+              <DialogTitle>
+                {initialData.description ? (
+                  <>Edit course description</>
+                ) : (
+                  <>Add course description</>
+                )}
+              </DialogTitle>
+              <DialogDescription>
+                Make changes to your course description here.
+              </DialogDescription>
+            </DialogHeader>
+            <Form {...form}>
+              <form
+                className="w-full h-fit"
+                onSubmit={form.handleSubmit(onSubmit)}
+              >
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Editor {...field} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <div className="flex items-center gap-x-2 mt-2">
+                  <Button
+                    className="w-full flex"
+                    disabled={!isValid || isSubmitting}
+                    type="submit"
+                    size="lg"
+                  >
+                    {isSubmitting ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <>Save</>
+                    )}
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          </DialogContent>
+        </Dialog>
+      </div>
+      <p
+        className={cn(
+          'text-sm mt-12 truncate line-clamp-2 font-semibold',
+          !initialData.description && 'text-slate-500 italic'
+        )}
+      >
+        {initialData.description || 'No description'}
+      </p>
     </div>
   )
 }
