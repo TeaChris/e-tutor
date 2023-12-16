@@ -4,8 +4,7 @@ import * as z from 'zod'
 import axios from 'axios'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { Loader2, Pencil } from 'lucide-react'
-import { useState } from 'react'
+import { Loader2, Pencil, PlusCircle } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { Course } from '@prisma/client'
 
@@ -42,10 +41,6 @@ const formSchema = z.object({
 })
 
 export default function PriceForm({ initialData, courseId }: PriceFormProps) {
-  const [isEditing, setIsEditing] = useState(false)
-
-  const toggleEdit = () => setIsEditing((current) => !current)
-
   const router = useRouter()
   const { toast } = useToast()
 
@@ -83,10 +78,14 @@ export default function PriceForm({ initialData, courseId }: PriceFormProps) {
         Course price
         <Dialog>
           <DialogTrigger asChild>
-            <Button onClick={toggleEdit} variant="ghost">
-              {isEditing ? (
-                <>Cancel</>
-              ) : (
+            <Button variant="ghost">
+              {!initialData.price && (
+                <>
+                  <PlusCircle className="h-4 w-4 mr-2" />
+                  Add an price
+                </>
+              )}
+              {initialData.price && (
                 <>
                   <Pencil className="h-4 w-4 mr-2" />
                   Edit price
