@@ -16,7 +16,7 @@ export default function CourseNavbar({
   progressCount,
 }: CourseNavbarProps) {
   return (
-    <div className="p-4 border-b h-full flex items-center bg-white shadow-sm">
+    <div className="p-4 border-b border-slate-400 h-full flex items-center shadow-sm">
       {/* @ts-ignore */}
       <CourseMobileSidebar course={course} progressCount={progressCount} />
       <NavbarRoutes />
