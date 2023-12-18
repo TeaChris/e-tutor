@@ -43,12 +43,12 @@ export default async function SectionIdPage({
   return (
     <div>
       {userProgress?.isCompleted && (
-        <Banner variant="success" label="You already completed this chapter." />
+        <Banner variant="success" label="You already completed this section." />
       )}
       {isLocked && (
         <Banner
           variant="warning"
-          label="You need to purchase this course to watch this chapter."
+          label="You need to purchase this course to watch this section."
         />
       )}
       <div className="flex flex-col max-w-4xl mx-auto pb-20">

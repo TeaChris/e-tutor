@@ -20,6 +20,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Combobox } from '@/components/ui/combobox'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { Loader2 } from 'lucide-react'
 
 interface BasicInfoProps {
   options: { label: string; value: string }[]
@@ -284,7 +285,11 @@ export default function BasicInfo({
                   variant={'default'}
                   className="w-40"
                 >
-                  Continue
+                  {isSubmitting ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <>continue</>
+                  )}
                 </Button>
               </div>
             </form>
