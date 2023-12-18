@@ -34,7 +34,36 @@ export default function CourseCard({
           <div className="text-lg md:text-base font-medium group-hover:text-orange-700 transition line-clamp-2">
             {title}
           </div>
-          <p className="text-xs text-muted-foreground">{category}</p>
+          <div
+            className={`w-fit h-fit px-2 py-[0.012rem] rounded-sm ${
+              category === 'Music'
+                ? 'bg-purple-100 text-purple-900'
+                : category === 'Photography'
+                ? 'bg-emerald-100 text-emerald-900'
+                : category === 'Fitness'
+                ? 'bg-sky-100 text-sky-900'
+                : category === 'Accounting'
+                ? 'bg-slate-50 text-slate-700'
+                : category === 'Computer Science'
+                ? 'bg-red-100 text-red-900'
+                : category === 'Filming'
+                ? 'bg-orange-100 text-orange-900'
+                : category === 'Engineering'
+                ? 'bg-yellow-100 text-yellow-900'
+                : category === 'Business'
+                ? 'text-lime-900 bg-lime-100'
+                : category === 'Health & Fitness'
+                ? 'bg-green-100 text-green-900'
+                : category === 'Marketing'
+                ? 'bg-teal-100 text-teal-900'
+                : category === 'Life Style'
+                ? 'text-cyan-900 bg-cyan-100'
+                : 'text-pink-900 bg-pink-100'
+            }`}
+          >
+            <p className="text-xs">{category}</p>
+          </div>
+
           <div className="my-3 flex items-center gap-x-2 text-sm md:text-xs">
             <div className="flex items-center gap-x-1 text-slate-500">
               <IconBadge size={'sm'} icon={BookOpen} />
