@@ -6,7 +6,7 @@ import { LogOut } from 'lucide-react'
 import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
-import SearchInput from '@/app/(students)/_components/SearchInput'
+import SearchInput from '@/components/SearchInput'
 import { isInstructor } from '@/lib/instructor'
 
 export const NavbarRoutes = () => {

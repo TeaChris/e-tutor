@@ -7,7 +7,7 @@ import MobileSidebar from './MobileSidebar'
 import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-react'
 import { UserButton } from '@clerk/nextjs'
-import SearchInput from './SearchInput'
+import SearchInput from '../../../components/SearchInput'
 
 type Route = {
   [key: string]: string

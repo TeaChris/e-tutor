@@ -1,16 +1,16 @@
-import { db } from '@/lib/db'
-import SearchInput from '@/components/SearchInput'
 import { getCourses } from '@/actions/get-courses'
+import Categories from '@/components/Categories'
+import CoursesList from '@/components/CoursesList'
+import SearchInput from '@/components/SearchInput'
+import { db } from '@/lib/db'
 import { auth } from '@clerk/nextjs'
 import { redirect } from 'next/navigation'
-import CoursesList from '@/components/CoursesList'
-import Categories from '@/components/Categories'
 
 interface SearchPageProps {
   searchParams: { title: string; categoryId: string }
 }
 
-export default async function BrowsePage({ searchParams }: SearchPageProps) {
+export default async function CoursePage({ searchParams }: SearchPageProps) {
   const { userId } = auth()
 
   if (!userId) {
