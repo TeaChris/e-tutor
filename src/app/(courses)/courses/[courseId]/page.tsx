@@ -3,31 +3,32 @@ import { db } from '@/lib/db'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import CourseEnrollButton from './sections/[sectionId]/_components/CourseEnrollButton'
+import { getSection } from '@/actions/get-section'
+import { auth } from '@clerk/nextjs'
+import { Button } from '@/components/ui/button'
 
 export default async function CourseIdPage({
   params,
 }: {
   params: { courseId: string }
 }) {
+  const { userId } = auth()
+
   const course = await db.course.findUnique({
     where: {
       id: params.courseId,
     },
-    // include: {
-    //   sections: {
-    //     where: {
-    //       isPublished: true,
-    //     },
-    //     orderBy: {
-    //       position: 'asc',
-    //     },
-    //   },
-    // },
   })
 
   if (!course) {
     return redirect('/')
   }
+
+  const { purchase } = await getSection({
+    // @ts-expect-error
+    userId,
+    courseId: params.courseId,
+  })
 
   return (
     <div className="w-full h-full flex items-center justify-center">
@@ -43,7 +44,14 @@ export default async function CourseIdPage({
         <p className="text-slate-500 text-2xl font-bold hover:text-orange-700 text-start">
           {course.title}
         </p>
-        <CourseEnrollButton courseId={params.courseId} price={course.price!} />
+        {purchase ? (
+          <Button disabled>Already Enrolled</Button>
+        ) : (
+          <CourseEnrollButton
+            courseId={params.courseId}
+            price={course.price!}
+          />
+        )}
       </div>
     </div>
   )
