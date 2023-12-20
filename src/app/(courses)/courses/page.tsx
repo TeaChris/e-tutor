@@ -1,6 +1,6 @@
 import { getCourses } from '@/actions/get-courses'
 import Categories from '@/components/Categories'
-import CoursesList from '@/components/CoursesList'
+import CoursesLists from '@/components/CourseLists'
 import SearchInput from '@/components/SearchInput'
 import { db } from '@/lib/db'
 import { auth } from '@clerk/nextjs'
@@ -35,7 +35,7 @@ export default async function CoursePage({ searchParams }: SearchPageProps) {
       <div className="p-6 space-y-4">
         <Categories items={categories} />
 
-        <CoursesList items={courses} />
+        <CoursesLists items={courses} />
       </div>
     </>
   )
