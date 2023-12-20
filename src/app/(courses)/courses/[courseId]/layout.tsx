@@ -3,8 +3,8 @@ import { redirect } from 'next/navigation'
 
 import { db } from '@/lib/db'
 import { getProgress } from '@/actions/get-progress'
-import CourseNavbar from './_components/CourseNavbar'
-import CourseSidebar from './_components/CourseSidebar'
+import CourseNavbar from '@/app/(students)/(routes)/watch/[watchId]/_components/CourseNavbar'
+import CourseSidebar from '@/app/(students)/(routes)/watch/[watchId]/_components/CourseSidebar'
 
 const CourseLayout = async ({
   children,
