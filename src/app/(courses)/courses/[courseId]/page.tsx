@@ -1,10 +1,10 @@
 import { db } from '@/lib/db'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
-import CourseEnrollButton from './sections/[sectionId]/_components/CourseEnrollButton'
 import { getSection } from '@/actions/get-section'
 import { auth } from '@clerk/nextjs'
 import { Button } from '@/components/ui/button'
+import CourseEnrollButton from '@/components/CourseEnrollButton'
 
 export default async function CourseIdPage({
   params,
