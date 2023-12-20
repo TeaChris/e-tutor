@@ -8,11 +8,11 @@ export default function BestCourses() {
     <section className="w-full h-fit py-2 bg-transparent">
       <MaxWidthWrapper className="px-52 flex flex-col items-center gap-8">
         <h3 className="text-[40px] font-semibold ">Best selling course</h3>
-        <div className="w-full h-fit flex flex-wrap gap-8 items-start">
+        <div className="w-full h-fit grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4 gap-8 items-start">
           {bestCourses.map((courses) => (
             <Link
               key={courses.id}
-              href={`/courses/course${courses.id}`}
+              href={`/courses/courses`}
               className="w-[244px] h-[333px] flex flex-col items-start gap-3 bg-neutral-100 rounded-[2px]"
             >
               <Image

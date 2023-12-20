@@ -12,6 +12,8 @@ import { Button } from './ui/button'
 import { UserButton, auth } from '@clerk/nextjs'
 import { Menu, PlusCircle } from 'lucide-react'
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
+import MobileNav from './MobileNav'
+import { isInstructor } from '@/lib/instructor'
 
 type Nav = {
   label: string
@@ -31,7 +33,7 @@ export default async function Navbar() {
   return (
     <nav className="w-full bg-transparent flex flex-col items-start gap-0">
       {/* top nav */}
-      <div className="w-full h-[52px] bg-[#1D2026] flex items-center justify-center">
+      <div className="hidden w-full h-[52px] bg-[#1D2026] lg:flex items-center justify-center">
         <MaxWidthWrapper className="md:px-2.5 flex items-center justify-between">
           <div className="hidden lg:flex w-[29rem] p-0 h-full items-center gap-6">
             {nav.map((item) => (
@@ -72,10 +74,22 @@ export default async function Navbar() {
 
       {/* bottom nav */}
       <div
-        className={`w-full h-[96px] bg-transparent lg:flex items-center justify-center`}
+        className={`w-full h-[70px] lg:h-[96px] bg-transparent flex items-center justify-center`}
       >
         <MaxWidthWrapper className="md:px-2.5 flex items-center justify-between">
-          <div className="flex items-center gap-6 w-fit h-full">
+          <div className="flex items-center lg:gap-6 w-fit h-full">
+            <div className="block lg:hidden">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant={'ghost'} className="text-slate-500">
+                    <Menu className="w-5 h-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side={'left'} className="p-0 bg-white w-72">
+                  <MobileNav />
+                </SheetContent>
+              </Sheet>
+            </div>
             <Link href="/" className="">
               <Image
                 src="/icons/logo.svg"
@@ -84,28 +98,17 @@ export default async function Navbar() {
                 height={120}
               />
             </Link>
-            <Link href="/instructor/create">
-              <Button variant={'default'} className="flex items-center gap-2">
-                <PlusCircle className="h-4 w-4" />
-                create
-              </Button>
-            </Link>
+            {isInstructor(userId) && (
+              <Link href="/instructor/create" className="hidden lg:block">
+                <Button variant={'default'} className="flex items-center gap-2">
+                  <PlusCircle className="h-4 w-4" />
+                  create
+                </Button>
+              </Link>
+            )}
           </div>
-          <div className="flex items-center gap-4 w-fit">
-            <div className="w-fit flex items-center gap-3">
-              <div className="block lg:hidden">
-                <Sheet>
-                  <SheetTrigger asChild>
-                    <Button variant={'ghost'} className="text-slate-500">
-                      <Menu className="w-5 h-5" />
-                    </Button>
-                  </SheetTrigger>
-                  <SheetContent
-                    side={'left'}
-                    className="p-0 bg-white w-72"
-                  ></SheetContent>
-                </Sheet>
-              </div>
+          <div className="lg:flex items-center gap-4 w-fit">
+            <div className="w-fit hidden lg:flex items-center gap-3">
               <Button variant={'ghost'}>
                 <Image
                   src="/icons/cart.svg"
