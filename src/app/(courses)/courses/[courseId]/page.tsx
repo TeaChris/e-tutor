@@ -1,4 +1,3 @@
-import CourseCard from '@/components/CourseCard'
 import { db } from '@/lib/db'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
