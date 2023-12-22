@@ -39,7 +39,7 @@ export default function Home() {
       {/* top category */}
       <section className="w-full h-fit lg:h-[490px] bg-neutral-100">
         <MaxWidthWrapper className="lg:px-52 flex flex-col items-center gap-8 mt-4">
-          <h3 className="text-2xl lg:text-3xl font-semibold ">
+          <h3 className="text-4xl lg:text-3xl font-semibold ">
             Browse top category
           </h3>
           <div className="w-full h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start gap-y-2">
