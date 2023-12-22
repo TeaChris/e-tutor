@@ -86,7 +86,7 @@ export default async function Navbar() {
                   </Button>
                 </SheetTrigger>
                 <SheetContent side={'left'} className="p-0 bg-white w-72">
-                  <MobileNav />
+                  <MobileNav userId={userId} />
                 </SheetContent>
               </Sheet>
             </div>
@@ -124,7 +124,7 @@ export default async function Navbar() {
                 <UserButton afterSignOutUrl="/" />
               ) : (
                 <>
-                  <Link href="/sign-up">
+                  <Link href="/sign-up" className="lg:block hidden">
                     <Button className="bg-[#FFEEE8] text-[#FF6636] hover:bg-[#FFEEE8]">
                       Create account
                     </Button>
