@@ -10,7 +10,7 @@ export default function BestCourses() {
         <h3 className="text-4xl lg:text-3xl font-semibold ">
           Best selling course
         </h3>
-        <div className="w-full h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-start px-12 md:px-0">
+        <div className="w-full h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-start px-6 md:px-0">
           {bestCourses.map((courses) => (
             <Link
               key={courses.id}
@@ -20,8 +20,9 @@ export default function BestCourses() {
               <Image
                 src={courses.image}
                 alt={courses.title}
-                width={700}
-                height={700}
+                width={1000}
+                height={1000}
+                placeholder="blur"
                 className="w-full h-96 lg:w-[244px] lg:h-[183px] object-cover"
               />
               <div className="w-full flex items-center justify-between px-2">
