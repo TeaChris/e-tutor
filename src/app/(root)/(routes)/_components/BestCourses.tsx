@@ -22,8 +22,7 @@ export default function BestCourses() {
                 alt={courses.title}
                 width={1000}
                 height={1000}
-                placeholder="blur"
-                className="w-full h-96 lg:w-[244px] lg:h-[183px] object-cover"
+                className="w-full h-72 lg:w-[244px] lg:h-[183px] object-cover"
               />
               <div className="w-full flex items-center justify-between px-2">
                 <div
