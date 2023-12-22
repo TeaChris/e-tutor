@@ -6,21 +6,23 @@ import Link from 'next/link'
 export default function BestCourses() {
   return (
     <section className="w-full h-fit py-2 bg-transparent">
-      <MaxWidthWrapper className="px-52 flex flex-col items-center gap-8">
-        <h3 className="text-[40px] font-semibold ">Best selling course</h3>
-        <div className="w-full h-fit grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4 gap-8 items-start">
+      <MaxWidthWrapper className="lg:px-52 flex flex-col items-center gap-8">
+        <h3 className="text-2xl lg:text-3xl font-semibold ">
+          Best selling course
+        </h3>
+        <div className="w-full h-fit grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-8 items-start">
           {bestCourses.map((courses) => (
             <Link
               key={courses.id}
               href={`/courses/courses`}
-              className="w-[244px] h-[333px] flex flex-col items-start gap-3 bg-neutral-100 rounded-[2px]"
+              className="w-full h-fit pb-2 lg:pb-0 lg:w-[244px] lg:h-[333px] flex flex-col items-start gap-3 bg-neutral-100 rounded-[2px]"
             >
               <Image
                 src={courses.image}
                 alt={courses.title}
-                width={200}
-                height={200}
-                className="w-[244px] h-[183px] object-cover"
+                width={500}
+                height={500}
+                className="w-full h-[220px] lg:w-[244px] lg:h-[183px] object-cover"
               />
               <div className="w-full flex items-center justify-between px-2">
                 <div
