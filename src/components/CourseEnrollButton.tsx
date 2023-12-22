@@ -7,6 +7,7 @@ import toast from 'react-hot-toast'
 import { Button } from '@/components/ui/button'
 import { formatPrice } from '@/lib/format'
 import { Loader2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 interface CourseEnrollButtonProps {
   price: number
@@ -19,6 +20,8 @@ export default function CourseEnrollButton({
 }: CourseEnrollButtonProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
+  const router = useRouter()
+
   const onClick = async () => {
     try {
       setIsLoading(true)
@@ -26,6 +29,7 @@ export default function CourseEnrollButton({
       const response = await axios.post(`/api/courses/${courseId}/checkout`)
 
       window.location.assign(response.data.url)
+      router.push('/browse')
     } catch {
       toast.error('Something went wrong')
     } finally {
