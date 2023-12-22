@@ -9,7 +9,7 @@ import BestCourses from './_components/BestCourses'
 export default function Home() {
   return (
     <main className="w-full h-fit flex flex-col items-start gap-20 px-2">
-      <header className="w-full items-start lg:items-center flex justify-between h-fit py-2 lg:py-0 lg:h-[548px] lg:pl-52 lg:border-t border-neutral-300">
+      <header className="w-full items-start lg:items-center flex justify-between h-fit py-2 lg:py-0 lg:h-[548px] lg:border-t border-neutral-300">
         <div className="w-full lg:w-[45%] h-fit flex flex-col items-center lg:items-start gap-5">
           <h2 className="text-[50px] text-center lg:text-start lg:text-[60px] font-semibold lg:leading-[4rem] leading-snug">
             Learn with expert anytime anywhere
@@ -42,13 +42,13 @@ export default function Home() {
           <h3 className="text-2xl lg:text-3xl font-semibold ">
             Browse top category
           </h3>
-          <div className="w-full h-fit flex flex-wrap justify-between items-start gap-y-2">
+          <div className="w-full h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start gap-y-2">
             {categories.map((category) => (
               <Link
                 key={category.id}
                 href={`/category/${category.slug}`}
                 style={{ backgroundColor: category.bgColor }}
-                className={`w-[20rem] lg:w-[260px] h-[90px] p-2 flex items-center gap-3`}
+                className={`w-full md:w-[18rem] lg:w-[260px] h-[90px] p-2 flex items-center gap-3`}
               >
                 <div
                   className="w-[64px] aspect-square flex items-center justify-center"

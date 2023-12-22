@@ -20,9 +20,9 @@ export default function BestCourses() {
               <Image
                 src={courses.image}
                 alt={courses.title}
-                width={500}
-                height={500}
-                className="w-full h-[220px] lg:w-[244px] lg:h-[183px] object-cover"
+                width={700}
+                height={700}
+                className="w-full h-[400px] lg:w-[244px] lg:h-[183px] object-cover"
               />
               <div className="w-full flex items-center justify-between px-2">
                 <div
