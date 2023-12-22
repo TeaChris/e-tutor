@@ -22,7 +22,7 @@ interface MobileNavProps {
 
 export default function MobileNav({ userId }: MobileNavProps) {
   return (
-    <div className="w-full h-full flex flex-col items-center pt-32 px-2">
+    <div className="w-full h-full flex flex-col items-center pt-44 px-2">
       <div className="w-full h-1/2 flex flex-col items-center gap-4">
         {nav.map((item) => (
           <Link
