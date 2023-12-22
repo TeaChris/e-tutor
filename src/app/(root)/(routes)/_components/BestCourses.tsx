@@ -7,10 +7,10 @@ export default function BestCourses() {
   return (
     <section className="w-full h-fit py-2 bg-transparent">
       <MaxWidthWrapper className="lg:px-52 flex flex-col items-center gap-8">
-        <h3 className="text-2xl lg:text-3xl font-semibold ">
+        <h3 className="text-4xl lg:text-3xl font-semibold ">
           Best selling course
         </h3>
-        <div className="w-full h-fit grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-8 items-start">
+        <div className="w-full h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-start px-12 md:px-0">
           {bestCourses.map((courses) => (
             <Link
               key={courses.id}
@@ -22,7 +22,7 @@ export default function BestCourses() {
                 alt={courses.title}
                 width={700}
                 height={700}
-                className="w-full h-[400px] lg:w-[244px] lg:h-[183px] object-cover"
+                className="w-full h-96 lg:w-[244px] lg:h-[183px] object-cover"
               />
               <div className="w-full flex items-center justify-between px-2">
                 <div
