@@ -5,6 +5,7 @@ import { getSection } from '@/actions/get-section'
 import { auth } from '@clerk/nextjs'
 import { Button } from '@/components/ui/button'
 import CourseEnrollButton from '@/components/CourseEnrollButton'
+import Link from 'next/link'
 
 export default async function CourseIdPage({
   params,
@@ -44,7 +45,19 @@ export default async function CourseIdPage({
           {course.title}
         </p>
         {purchase ? (
-          <Button disabled>Already Enrolled</Button>
+          <>
+            <Button disabled>Already Enrolled</Button>
+            <h1 className="text-sm text-black font-medium">
+              Follow the{' '}
+              <Link
+                href={'/browse'}
+                className="text-blue-700 underline font-semibold"
+              >
+                link
+              </Link>{' '}
+              to visit your dashboard
+            </h1>
+          </>
         ) : (
           <CourseEnrollButton
             courseId={params.courseId}
