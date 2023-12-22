@@ -28,7 +28,7 @@ export default function MobileNav({ userId }: MobileNavProps) {
           <Link
             key={item.label}
             href={item.href}
-            className="text-[14px] text-black font-semibold"
+            className="text-lg text-black font-semibold"
           >
             {item.label}
           </Link>
