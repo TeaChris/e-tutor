@@ -62,7 +62,7 @@ export default function ImageForm({ initialData, courseId }: ImageFormProps) {
   return (
     <div className="w-full h-full flex flex-col items-start gap-2 border bg-slate-100 rounded-md p-4">
       <div className="w-full h-fit flex items-center justify-between">
-        <h3 className="text-sm text-black font-semibold">Course thumbnail</h3>
+        <h3 className="text-sm text-black">Course thumbnail</h3>
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="ghost">

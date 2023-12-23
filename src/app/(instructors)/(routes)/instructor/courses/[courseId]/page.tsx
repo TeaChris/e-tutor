@@ -61,10 +61,10 @@ export default async function CourseId({
         </div>
       )}
 
-      <div className="w-full h-[90%] flex items-center justify-center mt-4">
-        <div className="w-[85%] h-full bg-white rounded-sm flex flex-col items-start gap-0">
+      <div className="w-full h-full lg:h-[90%] flex items-center justify-center lg:mt-4">
+        <div className="w-full lg:w-[85%] h-full bg-white rounded-sm flex flex-col items-start gap-0">
           <div className="w-full h-full p-2 flex flex-col items-start gap-0">
-            <div className="w-full h-[9%] flex items-center justify-between">
+            <div className="w-full h-[9%] flex flex-col lg:flex-row gap-4 items-start lg:items-center lg:justify-between">
               <h4 className="text-xl text-black font-semibold">
                 Advanced Information
               </h4>
@@ -76,30 +76,30 @@ export default async function CourseId({
               />
             </div>
 
-            <ScrollArea className="w-full h-[99%]">
+            <ScrollArea className="w-full h-[99%] mt-10">
               <div className="h-[91%] w-full flex flex-col items-start gap-3">
-                <div className="w-full h-fit lg:h-60 border-b p-2 border-neutral-200 flex flex-col lg:flex-row items-start gap-[2%]">
-                  <div className="w-[48%] h-full p-3">
+                <div className="w-full h-fit lg:h-60 lg:p-2 flex flex-col lg:flex-row items-start gap-4 lg:gap-[2%]">
+                  <div className="w-[90%] lg:w-[48%] h-full lg:p-3">
                     <ImageForm initialData={course} courseId={course.id} />
                   </div>
-                  <div className="w-[48%] h-full p-3">
+                  <div className="w-[90%] l:gw-[48%] h-full lg:p-3">
                     <PriceForm initialData={course} courseId={course.id} />
                   </div>
                 </div>
 
                 {/* bottom */}
-                <div className="w-full h-fit lg:h-60 p-2 flex flex-col lg:flex-row items-start gap-[2%]">
-                  <div className="w-[48%] h-full">
+                <div className="w-full h-fit lg:h-60 lg:p-2 flex flex-col lg:flex-row items-start gap-[2%]">
+                  <div className="w-[90%] lg:w-[48%] h-full">
                     <DescriptionForm
                       initialData={course}
                       courseId={course.id}
                     />
                   </div>
-                  <div className="w-[48%] h-full">
+                  <div className="w-[90%] lg:w-[48%] h-full">
                     <AttachmentForm initialData={course} courseId={course.id} />
                   </div>
                 </div>
-                <div className="w-full h-fit flex flex-col items-start gap-3">
+                <div className="w-[90%] h-fit flex flex-col items-start gap-3">
                   {/* @ts-ignore */}
                   <CourseCurriculum initialData={course} courseId={course.id} />
                 </div>
