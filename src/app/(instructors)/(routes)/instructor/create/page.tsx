@@ -39,7 +39,7 @@ export default async function Create({}: CreateProps) {
 
   return (
     <div className="w-full h-full flex items-center justify-center">
-      <div className="w-[85%] h-[85%] bg-white rounded-sm flex flex-col items-start gap-0">
+      <div className="w-full h-full lg:w-[85%] lg:h-[85%] bg-white rounded-sm flex flex-col items-start gap-0">
         <BasicInfo
           options={categories.map((category) => ({
             label: category.name,

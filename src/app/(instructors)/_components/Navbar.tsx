@@ -54,14 +54,14 @@ export default function Navbar() {
         </div>
         {isInstructor(userId) ? (
           <div className="w-fit flex items-center gap-4">
-            <span className="text-base font-semibold text-black">
+            <span className="text-base font-semibold text-black hidden lg:block">
               Instructor
             </span>
             <UserButton afterSignOutUrl="/" />
           </div>
         ) : (
           <div className="w-fit flex items-center gap-4">
-            <span className="text-base font-semibold text-black">Student</span>
+            <span className="text-base font-semibold text-black hidden lg:block">Student</span>
             <UserButton afterSignOutUrl="/" />
           </div>
         )}

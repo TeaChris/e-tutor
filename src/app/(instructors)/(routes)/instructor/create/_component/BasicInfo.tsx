@@ -98,12 +98,12 @@ export default function BasicInfo({
 
   return (
     <div className="w-full h-full p-2 flex flex-col items-start gap-0">
-      <div className="w-full h-[9%] flex items-center justify-between">
+      <div className="w-full h-[4%] md:h-[9%] flex items-center justify-between">
         <h4 className="text-xl text-black font-semibold">Basic Information</h4>
       </div>
 
       <div className="h-[91%] w-full flex flex-col items-start gap-3">
-        <ScrollArea className="w-full h-[99%] pt-10">
+        <ScrollArea className="w-full h-[95%] pt-10">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
