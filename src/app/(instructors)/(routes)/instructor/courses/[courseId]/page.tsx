@@ -82,7 +82,7 @@ export default async function CourseId({
                   <div className="w-[90%] lg:w-[48%] h-full lg:p-3">
                     <ImageForm initialData={course} courseId={course.id} />
                   </div>
-                  <div className="w-[90%] l:gw-[48%] h-full lg:p-3">
+                  <div className="w-[90%] lg:w-[48%] h-full lg:p-3">
                     <PriceForm initialData={course} courseId={course.id} />
                   </div>
                 </div>
@@ -99,7 +99,7 @@ export default async function CourseId({
                     <AttachmentForm initialData={course} courseId={course.id} />
                   </div>
                 </div>
-                <div className="w-[90%] h-fit flex flex-col items-start gap-3">
+                <div className="w-[90%] lg:w-full h-fit flex flex-col items-start gap-3">
                   {/* @ts-ignore */}
                   <CourseCurriculum initialData={course} courseId={course.id} />
                 </div>
