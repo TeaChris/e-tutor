@@ -44,9 +44,16 @@ export default async function CourseIdPage({
         <p className="text-slate-500 text-2xl font-bold hover:text-orange-700 text-start">
           {course.title}
         </p>
-        {purchase ? (
+        {!purchase && (
+          <CourseEnrollButton
+            courseId={params.courseId}
+            price={course.price!}
+          />
+        )}
+
+        {purchase && (
           <>
-            <Button disabled>Already Enrolled</Button>
+            <Button disabled>Already Bought</Button>
             <h1 className="text-sm text-black font-medium">
               Follow the{' '}
               <Link
@@ -58,11 +65,6 @@ export default async function CourseIdPage({
               to visit your dashboard
             </h1>
           </>
-        ) : (
-          <CourseEnrollButton
-            courseId={params.courseId}
-            price={course.price!}
-          />
         )}
       </div>
     </div>
