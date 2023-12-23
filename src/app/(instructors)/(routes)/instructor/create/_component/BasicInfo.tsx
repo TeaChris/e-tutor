@@ -208,7 +208,7 @@ export default function BasicInfo({
               </div>
 
               {/*  */}
-              <div className="w-full flex flex-col md:flex-row items-start gap-12 lg:justify-between">
+              <div className="w-full flex flex-col md:flex-row items-start gap-12 lg:justify-between md:mt-8">
                 <FormField
                   control={form.control}
                   name="languageId"
