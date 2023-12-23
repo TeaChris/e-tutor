@@ -23,7 +23,7 @@ export default async function CoursesPage() {
   })
 
   return (
-    <div className="p-6">
+    <div className="lg:p-6">
       <DataTable columns={columns} data={courses} />
     </div>
   )
