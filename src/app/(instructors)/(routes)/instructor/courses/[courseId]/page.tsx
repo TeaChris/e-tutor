@@ -79,27 +79,27 @@ export default async function CourseId({
             <ScrollArea className="w-full h-[99%] mt-10">
               <div className="h-[91%] w-full flex flex-col items-start gap-3">
                 <div className="w-full h-fit lg:h-60 lg:p-2 flex flex-col lg:flex-row items-start gap-4 lg:gap-[2%]">
-                  <div className="w-[90%] lg:w-[48%] h-full lg:p-3">
+                  <div className="w-full lg:w-[48%] h-full lg:p-3">
                     <ImageForm initialData={course} courseId={course.id} />
                   </div>
-                  <div className="w-[90%] lg:w-[48%] h-full lg:p-3">
+                  <div className="w-full lg:w-[48%] h-full lg:p-3">
                     <PriceForm initialData={course} courseId={course.id} />
                   </div>
                 </div>
 
                 {/* bottom */}
                 <div className="w-full h-fit lg:h-60 lg:p-2 flex flex-col lg:flex-row items-start gap-[2%]">
-                  <div className="w-[90%] lg:w-[48%] h-full">
+                  <div className="w-full lg:w-[48%] h-full">
                     <DescriptionForm
                       initialData={course}
                       courseId={course.id}
                     />
                   </div>
-                  <div className="w-[90%] lg:w-[48%] h-full">
+                  <div className="w-full lg:w-[48%] h-full">
                     <AttachmentForm initialData={course} courseId={course.id} />
                   </div>
                 </div>
-                <div className="w-[90%] lg:w-full h-fit flex flex-col items-start gap-3">
+                <div className="w-full h-fit flex flex-col items-start gap-3">
                   {/* @ts-ignore */}
                   <CourseCurriculum initialData={course} courseId={course.id} />
                 </div>
