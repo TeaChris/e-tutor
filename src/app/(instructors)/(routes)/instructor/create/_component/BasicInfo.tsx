@@ -126,6 +126,7 @@ export default function BasicInfo({
                           disabled={isSubmitting}
                           placeholder="e.g. 'Advanced web development'"
                           {...field}
+                          className="w-full"
                         />
                       </div>
                     </FormControl>
@@ -158,12 +159,12 @@ export default function BasicInfo({
                   </FormItem>
                 )}
               />
-              <div className="w-full flex items-start justify-between">
+              <div className="w-full flex flex-col md:flex-row items-start gap-y-8 md:justify-between">
                 <FormField
                   control={form.control}
                   name="categoryId"
                   render={({ field }) => (
-                    <FormItem className="w-[49%] p-2 h-12">
+                    <FormItem className="w-full md:w-[49%] p-2 h-12">
                       <FormControl>
                         <div className="w-full h-fit flex flex-col items-start gap-1">
                           <FormLabel
@@ -184,7 +185,7 @@ export default function BasicInfo({
                   control={form.control}
                   name="topic"
                   render={({ field }) => (
-                    <FormItem className="w-[49%] p-2">
+                    <FormItem className="w-full md:w-[49%] p-2 h-12 mt-2 lg:mt-0">
                       <FormControl>
                         <div className="w-full h-fit flex flex-col items-start gap-1">
                           <FormLabel
@@ -207,12 +208,12 @@ export default function BasicInfo({
               </div>
 
               {/*  */}
-              <div className="w-full flex items-start justify-between">
+              <div className="w-full flex flex-col md:flex-row items-start gap-12 lg:justify-between">
                 <FormField
                   control={form.control}
                   name="languageId"
                   render={({ field }) => (
-                    <FormItem className="w-[32%] p-2 h-12">
+                    <FormItem className="w-full md:w-[32%] p-2 h-12 mt-8 lg:mt-0">
                       <FormControl>
                         <div className="w-full h-fit flex flex-col items-start gap-1">
                           <FormLabel
@@ -233,7 +234,7 @@ export default function BasicInfo({
                   control={form.control}
                   name="courseLevelId"
                   render={({ field }) => (
-                    <FormItem className="w-[32%] p-2 h-12">
+                    <FormItem className="w-full md:w-[32%] p-2 h-12">
                       <FormControl>
                         <div className="w-full h-fit flex flex-col items-start gap-1">
                           <FormLabel
@@ -254,7 +255,7 @@ export default function BasicInfo({
                   control={form.control}
                   name="courseDurationId"
                   render={({ field }) => (
-                    <FormItem className="w-[32%] p-2 h-12">
+                    <FormItem className="w-full md:w-[32%] p-2 h-12">
                       <FormControl>
                         <div className="w-full h-fit flex flex-col items-start gap-1">
                           <FormLabel
@@ -272,18 +273,12 @@ export default function BasicInfo({
                 />
               </div>
 
-              <div className="w-full h-fit flex items-start justify-between mt-12">
-                <Link href="/">
-                  <Button variant={'destructive'} className="w-40">
-                    Cancel
-                  </Button>
-                </Link>
-
+              <div className="w-full h-fit flex flex-col lg:flex-row gap-3 items-start lg:justify-between mt-12">
                 <Button
                   type="submit"
                   disabled={!isValid || isSubmitting}
                   variant={'default'}
-                  className="w-40"
+                  className="w-full lg:w-40"
                 >
                   {isSubmitting ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
@@ -291,6 +286,12 @@ export default function BasicInfo({
                     <>continue</>
                   )}
                 </Button>
+
+                <Link href="/" className="w-full">
+                  <Button variant={'link'} className="w-full lg:w-40">
+                    Cancel
+                  </Button>
+                </Link>
               </div>
             </form>
           </Form>
