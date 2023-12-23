@@ -44,7 +44,7 @@ export default function Navbar() {
     <div className="p-4 border-b h-full flex items-center bg-white shadow-sm">
       <MobileSidebar />
       <MaxWidthWrapper className="px-44 flex w-full h-full items-center justify-between py-1">
-        <div className="h-full flex flex-col w-fit items-start gap-1 pb-2">
+        <div className="hidden h-full lg:flex flex-col w-fit items-start gap-1 pb-2">
           <h6 className="capitalize text-[#6E7485] text-[14px] font-[500]">
             {getGreeting()}
           </h6>
@@ -54,7 +54,7 @@ export default function Navbar() {
         </div>
         {isInstructor(userId) ? (
           <div className="w-fit flex items-center gap-4">
-            <span className="text-base font-semibold text-black">Teacher</span>
+            <span className="text-base font-semibold text-black">Instructor</span>
             <UserButton afterSignOutUrl="/" />
           </div>
         ) : (
