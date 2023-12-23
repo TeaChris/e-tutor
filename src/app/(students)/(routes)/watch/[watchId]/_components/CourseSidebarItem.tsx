@@ -27,7 +27,7 @@ export default function CourseSidebarItem({
   const isActive = pathname?.includes(id)
 
   const onClick = () => {
-    router.push(`/courses/${courseId}/sections/${id}`)
+    router.push(`/watch/${courseId}/sections/${id}`)
   }
   return (
     <button

@@ -6,7 +6,7 @@ import CourseSidebar from './CourseSidebar'
 
 interface CourseMobileSidebarProps {
   course: Course & {
-    chapters: (Section & {
+    sections: (Section & {
       userProgress: UserProgress[] | null
     })[]
   }
