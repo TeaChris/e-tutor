@@ -35,7 +35,7 @@ export default async function CourseSidebar({
   return (
     <div className="h-full border-r flex flex-col overflow-y-auto shadow-sm">
       <div className="p-8 flex flex-col border-b">
-        <p className="font-semibold">{course.title}</p>
+        <p className="font-semibold text-white">{course.title}</p>
         {/* check purchase and add progress */}
         {purchase && (
           <div className="mt-10">
