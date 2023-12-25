@@ -1,7 +1,12 @@
+'use client'
+
 import Link from 'next/link'
 import { Button } from './ui/button'
 import { PlusCircle } from 'lucide-react'
 import { isInstructor } from '@/lib/instructor'
+import Image from 'next/image'
+import { cn } from '@/lib/utils'
+import { usePathname } from 'next/navigation'
 
 type Nav = {
   label: string
@@ -21,51 +26,36 @@ interface MobileNavProps {
 }
 
 export default function MobileNav({ userId }: MobileNavProps) {
+  const pathname = usePathname()
   return (
-    <div className="w-full h-full flex flex-col items-center pt-44 px-2">
-      <div className="w-full h-1/2 flex flex-col items-center gap-4">
+    <aside className="h-full border-r flex flex-col overflow-y-auto bg-black  shadow-sm">
+      <div className="p-6 flex items-center gap-2 h-[80px] border-b border-b-neutral-500">
+        <Link href="/">
+          <Image
+            src="/icons/logo2.svg"
+            alt="e-tutor logo"
+            width={100}
+            height={100}
+          />
+        </Link>
+      </div>
+
+      {/* navigation links */}
+      <div className="flex flex-col w-full">
         {nav.map((item) => (
           <Link
-            key={item.label}
             href={item.href}
-            className="text-lg text-black font-semibold"
+            key={item.label}
+            className={cn(
+              'h-12 flex items-center gap-x-2 text-[#8C94A3] text-sm font-[500] pl-6 transition-all hover:text-neutral-600 hover:bg-slate-300/20',
+              pathname === item.href &&
+                'bg-[#FF6636] text-white hover:bg-orange-700 hover:text-white'
+            )}
           >
             {item.label}
           </Link>
         ))}
       </div>
-
-      {isInstructor(userId) && (
-        <Link href="/instructor/create" className="hidden lg:block">
-          <Button
-            variant={'default'}
-            size={'lg'}
-            className="w-full flex items-center gap-2"
-          >
-            <PlusCircle className="h-4 w-4" />
-            create
-          </Button>
-        </Link>
-      )}
-
-      <div className="w-full flex flex-col items-center gap-3">
-        {userId ? (
-          <div></div>
-        ) : (
-          <>
-            <Link href="/sign-up" className="w-full">
-              <Button className="w-full bg-[#FFEEE8] text-[#FF6636] hover:bg-[#FFEEE8]">
-                Create account
-              </Button>
-            </Link>
-            <Link href="/sign-in" className="w-full">
-              <Button variant={'default'} className="w-full">
-                Sign in
-              </Button>
-            </Link>
-          </>
-        )}
-      </div>
-    </div>
+    </aside>
   )
 }
