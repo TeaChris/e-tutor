@@ -55,7 +55,7 @@ export default function VideoPlayer({
         router.refresh()
 
         if (nextSectionId) {
-          router.push(`/courses/${courseId}/sections/${nextSectionId}`)
+          router.push(`/watch/${courseId}/sections/${nextSectionId}`)
         }
       }
     } catch {

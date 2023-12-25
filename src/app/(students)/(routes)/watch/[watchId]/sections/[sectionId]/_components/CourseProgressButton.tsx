@@ -43,7 +43,7 @@ export default function CourseProgressButton({
       }
 
       if (!isCompleted && nextSectionId) {
-        router.push(`/courses/${courseId}/sections/${nextSectionId}`)
+        router.push(`/watch/${courseId}/sections/${nextSectionId}`)
       }
 
       toast({
