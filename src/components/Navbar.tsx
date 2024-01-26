@@ -23,9 +23,6 @@ type Nav = {
 const nav: Nav = [
   { label: 'Home', href: '/' },
   { label: 'Courses', href: '/courses' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'Become an Instructor', href: '/instructor' },
 ]
 export default async function Navbar() {
   const { userId } = auth()
