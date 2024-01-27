@@ -46,7 +46,7 @@ export default function Home() {
             {categories.map((category) => (
               <Link
                 key={category.id}
-                href={`/category/${category.slug}`}
+                href={`#`}
                 style={{ backgroundColor: category.bgColor }}
                 className={`w-full md:w-[18rem] lg:w-[260px] h-[90px] p-2 flex items-center gap-3`}
               >
