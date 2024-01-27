@@ -1,5 +1,3 @@
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
 import { DataTable } from './__components/DataTable'
 import { columns } from './__components/Columns'
 import { auth } from '@clerk/nextjs'
