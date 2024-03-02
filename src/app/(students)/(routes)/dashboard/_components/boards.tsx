@@ -2,6 +2,8 @@
 
 import { FC, useState } from 'react'
 
+import { useRouter, useSearchParams } from 'next/navigation'
+
 import { cn } from '@/lib/utils'
 import { Dashboard } from './dashboard'
 import { Courses } from './courses'
@@ -11,16 +13,20 @@ interface BoardsProps {}
 
 const Boards: FC<BoardsProps> = () => {
   const [active, setActive] = useState<string>('dashboard')
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
   const onClick = (link: string) => {
     setActive(link)
-    // TODO: map active link to url
+    const searchParams = new URLSearchParams(window.location.search)
+    searchParams.set('tab', link)
+    router.push(`${window.location.pathname}?${searchParams.toString()}`)
   }
 
   return (
     <section className="w-full space-y-12">
       <div className="flex items-center gap-x-6 w-full">
-        {['dashboard', 'courses', 'settings'].map((link, i) => (
+        {['dashboard', 'courses', 'settings'].map((link) => (
           <button
             key={link}
             className={cn(

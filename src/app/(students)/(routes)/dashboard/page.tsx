@@ -11,7 +11,7 @@ export default async function Page() {
   return (
     <div className="w-full min-h-screen relative">
       <div className="w-full h-[280px] bg-[#FFEEE8]"></div>
-      <div className="w-full flex items-center justify-center flex-1 top-7 absolute h-96">
+      <div className="w-full flex items-center justify-center flex-1 bottom-44 absolute h-96">
         <div className="w-3/4 py-2 h-max bg-white space-y-12">
           <div className="w-full px-8 space-y-4">
             <div className="w-full flex justify-between items-center">
