@@ -1,17 +1,12 @@
-'use client'
-
-import { useUser } from '@clerk/nextjs'
+import { auth, currentUser } from '@clerk/nextjs'
 import Image from 'next/image'
 import Boards from './_components/boards'
+import { redirect } from 'next/navigation'
 
-export default function Page() {
-  const { user } = useUser()
-
-  const PageMapping: Record<string, React.ComponentType> = {
-    dashboard: Dashboard,
-    courses: Courses,
-    settings: Settings,
-  }
+export default async function Page() {
+  const { userId } = auth()
+  const user = await currentUser()
+  if (!userId) return redirect('/sign-in')
 
   return (
     <div className="w-full min-h-screen relative">
@@ -32,7 +27,7 @@ export default function Page() {
                 />
                 <div className="space-y-2">
                   <h4 className="text-lg text-black font-medium">
-                    {user?.fullName}
+                    {user?.firstName}
                   </h4>
                   <p className="text-neutral-400 text-xs">{user?.lastName}</p>
                 </div>
@@ -41,23 +36,9 @@ export default function Page() {
             </div>
           </div>
 
-          <Boards
-            links={['dashboard', 'courses', 'settings']}
-            PageMap={PageMapping}
-          />
+          <Boards />
         </div>
       </div>
     </div>
   )
-}
-
-function Dashboard() {
-  return <div>Feeds</div>
-}
-
-function Courses() {
-  return <div>Challenges</div>
-}
-function Settings() {
-  return <div>network</div>
 }

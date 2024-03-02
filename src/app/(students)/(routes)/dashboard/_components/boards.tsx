@@ -1,49 +1,46 @@
 'use client'
 
-import { FC, useEffect, useState, Suspense } from 'react'
+import { FC, useState } from 'react'
 
-import { useRouter } from 'next/navigation'
+import { cn } from '@/lib/utils'
+import { Dashboard } from './dashboard'
+import { Courses } from './courses'
+import Settings from './Settings'
 
-import { SubNav } from '@/components/sub-nav'
+interface BoardsProps {}
 
-type PageMapType = Record<string, React.ComponentType>
-
-interface BoardsProps {
-  links: string[]
-  PageMap: PageMapType
-}
-
-const Boards: FC<BoardsProps> = ({ links, PageMap }) => {
-  const router = useRouter()
-  const [activeLink, setActiveLink] = useState<string>('dashboard') // Set the default active link
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search)
-    const activeLinkParam = urlParams.get('activeLink')
-    if (
-      activeLinkParam !== null &&
-      Object.keys(PageMap).includes(activeLinkParam)
-    ) {
-      setActiveLink(activeLinkParam)
-    }
-  }, [PageMap])
+const Boards: FC<BoardsProps> = () => {
+  const [active, setActive] = useState<string>('dashboard')
 
   const onClick = (link: string) => {
-    setActiveLink(link)
-
-    // Update the URL with the active link
-    const urlParams = new URLSearchParams(window.location.search)
-    urlParams.set('activeLink', link)
-    router.push(`${window.location.pathname}?${urlParams}`)
+    setActive(link)
+    // TODO: map active link to url
   }
 
-  const ActivePage = PageMap[activeLink]
   return (
     <section className="w-full space-y-12">
-      <SubNav links={links} activeLink={activeLink} onClick={onClick} />
-      <Suspense fallback="loading...">
-        <ActivePage />
-      </Suspense>
+      <div className="flex items-center gap-x-6 w-full">
+        {['dashboard', 'courses', 'settings'].map((link, i) => (
+          <button
+            key={link}
+            className={cn(
+              'text-base font-medium px-4 py-2 text-neutral-500 capitalize',
+              {
+                'text-black border-b-2 border-orange-600 transition duration-100':
+                  link === active,
+              }
+            )}
+            onClick={() => onClick(link)}
+          >
+            {link}
+          </button>
+        ))}
+      </div>
+      <div className="w-full">
+        {active === 'dashboard' && <Dashboard />}
+        {active === 'courses' && <Courses />}
+        {active === 'settings' && <Settings />}
+      </div>
     </section>
   )
 }
