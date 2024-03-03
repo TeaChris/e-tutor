@@ -1,12 +1,17 @@
 import { auth, currentUser } from '@clerk/nextjs'
-import { InfoCard } from './_components/info-card'
 
-import { PlayCircle, BookAudio } from 'lucide-react'
 import { getDashboardCourses } from '@/actions/get-dashboard-courses'
 import { getCourses } from '@/actions/get-courses'
-import CoursesList from '@/components/CoursesList'
+
+import { PlayCircle, BookAudio } from 'lucide-react'
+
 import Link from 'next/link'
+
 import { buttonVariants } from '@/components/ui/button'
+
+import CoursesList from '@/components/CoursesList'
+
+import { InfoCard } from '@/components/info-card'
 
 export default async function Dashboard() {
   const { userId } = auth()

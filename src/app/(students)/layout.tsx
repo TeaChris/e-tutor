@@ -3,7 +3,7 @@ import { auth, currentUser } from '@clerk/nextjs'
 import Image from 'next/image'
 
 import { redirect } from 'next/navigation'
-import { StudentNav } from './(routes)/dashboard/_components/student-nav'
+import { StudentNav } from '@/components/student-nav'
 
 export default async function StudentLayout({
   children,

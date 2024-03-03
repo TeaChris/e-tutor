@@ -6,9 +6,9 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
 const nav = [
-  { label: 'dashboard', link: '/dashboard' },
-  { label: 'courses', link: '/courses' },
-  { label: 'settings', link: '/settings' },
+  { label: 'dashboard', link: '/students/dashboard' },
+  { label: 'courses', link: '/students/courses' },
+  { label: 'settings', link: '/students/settings' },
 ]
 
 export function StudentNav() {
