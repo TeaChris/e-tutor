@@ -34,13 +34,17 @@ export default async function StudentLayout({
                       height={300}
                       className="w-[80px] aspect-square rounded-full object-cover"
                     />
-                    <div className="space-y-2">
-                      <h4 className="text-lg text-black font-medium">
-                        {user?.firstName}
+                    <div className="space-y-1">
+                      <h4 className="text-2xl text-black font-semibold">
+                        {user?.firstName} <span>{user?.lastName}</span>
                       </h4>
-                      <p className="text-neutral-400 text-xs">
-                        {user?.lastName}
-                      </p>
+                      <div className="flex space-x-4">
+                        {user?.emailAddresses.map((email, i) => (
+                          <p className="text-sm text-neutral-400" key={i}>
+                            {email.emailAddress}
+                          </p>
+                        ))}
+                      </div>
                     </div>
                   </div>
                   {/* TODO: add instructor button later */}
