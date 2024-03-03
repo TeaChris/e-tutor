@@ -1,42 +1,65 @@
 import { auth, currentUser } from '@clerk/nextjs'
-import Image from 'next/image'
-import Boards from './_components/boards'
-import { redirect } from 'next/navigation'
+import { InfoCard } from './_components/info-card'
 
-export default async function Page() {
+import { PlayCircle, BookAudio } from 'lucide-react'
+import { getDashboardCourses } from '@/actions/get-dashboard-courses'
+import { getCourses } from '@/actions/get-courses'
+import CoursesList from '@/components/CoursesList'
+import Link from 'next/link'
+import { buttonVariants } from '@/components/ui/button'
+
+export default async function Dashboard() {
   const { userId } = auth()
   const user = await currentUser()
-  if (!userId) return redirect('/sign-in')
 
+  const { completedCourses, coursesInProgress } = await getDashboardCourses(
+    // @ts-expect-error
+    userId
+  )
+
+  const courses = await getCourses({
+    // @ts-ignore
+    userId,
+  })
+
+  let total = completedCourses.length + coursesInProgress.length
   return (
-    <div className="w-full min-h-screen relative">
-      <div className="w-full h-[280px] bg-[#FFEEE8]"></div>
-      <div className="w-full flex items-center justify-center flex-1 bottom-44 absolute h-96">
-        <div className="w-3/4 py-2 h-max bg-white space-y-12">
-          <div className="w-full px-8 space-y-4">
-            <div className="w-full flex justify-between items-center">
-              <div className="flex items-center gap-2">
-                <Image
-                  // @ts-ignore
-                  src={user?.imageUrl}
-                  // @ts-ignore
-                  alt={user?.fullName}
-                  width={300}
-                  height={300}
-                  className="w-[80px] aspect-square rounded-full object-cover"
-                />
-                <div className="space-y-2">
-                  <h4 className="text-lg text-black font-medium">
-                    {user?.firstName}
-                  </h4>
-                  <p className="text-neutral-400 text-xs">{user?.lastName}</p>
-                </div>
-              </div>
-              {/* TODO: add instructor button later */}
-            </div>
-          </div>
+    <div className="w-full space-y-4 px-2">
+      <h4 className="text-xl text-black font-medium">Dashboard</h4>
+      <div className="w-full flex items-center justify-between h-[100px]">
+        <InfoCard
+          bg="#FFEEE8"
+          icon={PlayCircle}
+          label="Enrolled Course(s)"
+          numberOfItems={total}
+        />
+        <InfoCard
+          bg="#EBEBFF"
+          icon={BookAudio}
+          label="Active Course(s)"
+          numberOfItems={coursesInProgress.length}
+        />
+        <InfoCard
+          bg="#E1F7E3"
+          icon={BookAudio}
+          label="Completed Course(s)"
+          numberOfItems={completedCourses.length}
+        />
+      </div>
 
-          <Boards />
+      <div className="w-full mt-4 space-y-3">
+        <h4 className="text-xl text-black font-medium">
+          Let&apos;s start learning{' '}
+          <span className="capitalize">{user?.firstName}</span>
+        </h4>
+        <CoursesList items={courses} />
+        <div className="w-full flex justify-center items-center">
+          <Link
+            href={'/courses'}
+            className={buttonVariants({ variant: 'ghost' })}
+          >
+            Browse more courses &rarr;
+          </Link>
         </div>
       </div>
     </div>
