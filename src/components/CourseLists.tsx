@@ -12,13 +12,10 @@ interface CoursesListsProps {
 }
 
 export default function CoursesLists({ items }: CoursesListsProps) {
-  const shuffledItems = items.sort(() => Math.random() - 0.5)
-  const randomCourses = shuffledItems.slice(0, 4)
-
   return (
     <div>
       <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
-        {randomCourses.map((item) => (
+        {items.map((item) => (
           <CourseCards
             key={item.id}
             id={item.id}

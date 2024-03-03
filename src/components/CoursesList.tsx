@@ -1,14 +1,13 @@
 import CourseCard from '@/components/CourseCard'
 import { Category, Course } from '@prisma/client'
 
-type CourseWithProgressWithCategory = Course & {
+type CourseWithCategory = Course & {
   category: Category | null
   sections: { id: string }[]
-  progress: number | null
 }
 
 interface CoursesListProps {
-  items: CourseWithProgressWithCategory[]
+  items: CourseWithCategory[]
 }
 
 export default function CoursesList({ items }: CoursesListProps) {
@@ -23,7 +22,6 @@ export default function CoursesList({ items }: CoursesListProps) {
             imageUrl={item.imageUrl!}
             sectionsLength={item.sections.length}
             price={item.price!}
-            progress={item.progress!}
             // @ts-ignore
             category={item?.category?.name}
           />

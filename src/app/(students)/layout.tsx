@@ -18,10 +18,9 @@ export default async function StudentLayout({
     <div className="h-full">
       <Navbar />
 
-      <main className="space-y-12">
-        <div className="w-full relative">
-          <div className="w-full h-[280px] bg-[#FFEEE8]"></div>
-          <div className="w-full flex items-center justify-center top-60 absolute h-96">
+      <main className="w-full space-y-12">
+        <div className="w-full h-[280px] bg-[#FFEEE8] relative">
+          <div className="w-full flex items-center justify-center top-20 absolute h-max">
             <div className="w-3/4 py-2 h-max bg-white space-y-12">
               <div className="w-full px-8 space-y-4">
                 <div className="w-full flex justify-between items-center">

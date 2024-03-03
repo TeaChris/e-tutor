@@ -1,7 +1,7 @@
 import { auth, currentUser } from '@clerk/nextjs'
 
 import { getDashboardCourses } from '@/actions/get-dashboard-courses'
-import { getCourses } from '@/actions/get-courses'
+import { getCourse } from '@/actions/get-course'
 
 import { PlayCircle, BookAudio } from 'lucide-react'
 
@@ -9,9 +9,8 @@ import Link from 'next/link'
 
 import { buttonVariants } from '@/components/ui/button'
 
-import CoursesList from '@/components/CoursesList'
-
 import { InfoCard } from '@/components/info-card'
+import CoursesList from '@/components/CoursesList'
 
 export default async function Dashboard() {
   const { userId } = auth()
@@ -22,10 +21,8 @@ export default async function Dashboard() {
     userId
   )
 
-  const courses = await getCourses({
-    // @ts-ignore
-    userId,
-  })
+  // @ts-expect-error
+  const courses = await getCourse({ userId })
 
   let total = completedCourses.length + coursesInProgress.length
   return (
