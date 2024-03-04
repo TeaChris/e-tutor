@@ -19,7 +19,6 @@ export default function CourseEnrollButton({
 }: CourseEnrollButtonProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-
   const onClick = async () => {
     try {
       setIsLoading(true)
@@ -35,12 +34,7 @@ export default function CourseEnrollButton({
   }
 
   return (
-    <Button
-      onClick={onClick}
-      disabled={isLoading}
-      size="sm"
-      className="w-full md:w-auto"
-    >
+    <Button onClick={onClick} disabled={isLoading} size="lg" className="w-full">
       {isLoading ? (
         <Loader2 className="w-4 h-4 animate-spin" />
       ) : (

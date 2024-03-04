@@ -18,7 +18,9 @@ export default async function Page() {
   const courses = await getPurchased({ userId })
   return (
     <div className="w-full space-y-4 px-2">
-      <h4 className="text-xl text-black font-medium">Your Courses ({total})</h4>
+      <h4 className="text-xl text-black font-medium">
+        Your Active Course(s) ({total})
+      </h4>
 
       <CoursesLists items={courses} />
     </div>

@@ -4,6 +4,13 @@ import {
   LucideIcon,
   MonitorPlay,
   PlayCircle,
+  Aperture,
+  BaggageClaim,
+  BookmarkCheck,
+  CalendarCheck,
+  FileStack,
+  Fuel,
+  Image,
 } from 'lucide-react'
 
 type Categories = {
@@ -364,5 +371,45 @@ export const tabs: Tabs = [
     icon: PlayCircle,
     label: 'Publish Course',
     id: 4,
+  },
+]
+
+export const whoCourse = [
+  'This course is for those who want to launch a Freelance Web Design career.',
+  'Praesent eget consequat elit. Duis a pretium purus.',
+  'Sed sagittis suscipit condimentum pellentesque vulputate feugiat libero nec accumsan.',
+  'Sed nec dapibus orci integer nisl turpis, eleifend sit amet aliquam vel, lacinia quis ex.',
+  'Those who are looking to reboot their work life and try a new profession that is fun, rewarding and highly in-demand.',
+  'Duis ornare enim ullamcorper congue consectetur suspendisse interdum tristique est sed molestie.',
+]
+
+export const includes = [
+  {
+    icon: Aperture,
+    label: 'Lifetime access',
+  },
+  {
+    icon: BaggageClaim,
+    label: '30-days money back guarantee',
+  },
+  {
+    icon: BookmarkCheck,
+    label: 'Free exercise file & downloadable resources',
+  },
+  {
+    icon: CalendarCheck,
+    label: 'Shareable certificate of completion',
+  },
+  {
+    icon: FileStack,
+    label: 'Access on mobile, tablet and TV',
+  },
+  {
+    icon: Fuel,
+    label: 'English subtitle',
+  },
+  {
+    icon: Image,
+    label: '100% online course',
   },
 ]
