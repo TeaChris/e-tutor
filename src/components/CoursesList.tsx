@@ -1,5 +1,6 @@
 import CourseCard from '@/components/CourseCard'
 import { Category, Course } from '@prisma/client'
+import Link from 'next/link'
 
 type CourseWithCategory = Course & {
   category: Category | null
@@ -29,7 +30,11 @@ export default function CoursesList({ items }: CoursesListProps) {
       </div>
       {items.length === 0 && (
         <div className="text-center tex-sm text-muted-foreground mt-10">
-          No courses found
+          You have no course in your dashboard visit the{' '}
+          <Link href="/courses" className="underline">
+            courses page
+          </Link>{' '}
+          to enroll a course of your choice
         </div>
       )}
     </div>
