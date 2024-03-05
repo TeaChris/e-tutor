@@ -18,7 +18,7 @@ export const InfoCard = ({
 }: Props) => {
   return (
     <div
-      className={`w-[312px] h-full px-8 flex items-center py-3 space-x-4 bg-[${bg}]`}
+      className={`w-full lg:w-[312px] h-[100px] lg:h-full px-8 flex items-center py-3 space-x-4 bg-[${bg}]`}
     >
       <IconBadge variant={variant} icon={Icon} />
       <div>

@@ -28,7 +28,7 @@ export default async function Dashboard() {
   return (
     <div className="w-full space-y-4 px-2">
       <h4 className="text-xl text-black font-medium">Dashboard</h4>
-      <div className="w-full flex items-center justify-between h-[100px]">
+      <div className="w-full flex flex-col space-y-2 lg:space-y-0 lg:flex-row items-center justify-between h-max lg:h-[100px]">
         <InfoCard
           bg="#FFEEE8"
           icon={PlayCircle}

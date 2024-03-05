@@ -36,7 +36,7 @@ export default function CourseSidebarItem({
       className={cn(
         'flex items-center gap-x-2 text-slate-500 text-sm font-[500] pl-6 transition-all hover:text-slate-600 hover:bg-slate-300/20',
         isActive &&
-          'bg-orange-100 text-orange-700 hover:bg-orange-100 hover:text-orange-900',
+          'bg-orange-100 text-orange-700 hover:bg-emerald-200 hover:text-orange-900',
         isCompleted && 'text-emerald-700 hover:text-emerald-700',
         isCompleted && isActive && 'bg-emerald-200/20'
       )}

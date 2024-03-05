@@ -111,8 +111,8 @@ export default async function Page({
           label="You need to purchase this course to watch this course"
         />
       )}
-      <div className="w-full lg:px-20 flex items-start justify-between pt-4 pb-20">
-        <div className="w-[65%] space-y-4">
+      <div className="w-full px-3 lg:px-20 flex flex-col lg:flex-row items-start justify-between lg:gap-8 gap-0 pt-4 pb-20">
+        <div className="w-full lg:w-[65%] space-y-4">
           <h1 className="text-3xl sm:text-5xl font-bold text-gray-800">
             {cou?.title}
           </h1>
@@ -158,7 +158,10 @@ export default async function Page({
               ))}
 
               <h4 className="text-lg">
-                4.8 <span className="text-neutral-400">(451,444 Rating)</span>
+                4.8{' '}
+                <span className="text-neutral-400 hidden sm:block">
+                  (451,444 Rating)
+                </span>
               </h4>
             </div>
           </div>
@@ -226,7 +229,7 @@ export default async function Page({
           )}
         </div>
 
-        <div className="w-[33%] h-max py-2 bg-white shadow-md shadow-neutral-300">
+        <div className="w-full lg:w-[33%] h-max py-2 bg-white shadow-md shadow-neutral-300">
           {!purchase ? (
             <>
               <div className="w-full border-b space-y-2 px-2 pb-3">
