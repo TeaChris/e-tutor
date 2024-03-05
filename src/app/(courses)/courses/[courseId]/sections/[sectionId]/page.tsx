@@ -111,7 +111,7 @@ export default async function Page({
           label="You need to purchase this course to watch this course"
         />
       )}
-      <div className="w-full px-3 lg:px-20 flex flex-col lg:flex-row items-start justify-between lg:gap-8 gap-0 pt-4 pb-20">
+      <div className="w-full px-3 lg:px-20 flex flex-col space-y-6 lg:space-y-0 lg:flex-row items-start justify-between lg:gap-8 gap-0 pt-4 pb-20">
         <div className="w-full lg:w-[65%] space-y-4">
           <h1 className="text-3xl sm:text-5xl font-bold text-gray-800">
             {cou?.title}
