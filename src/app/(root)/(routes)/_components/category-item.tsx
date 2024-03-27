@@ -38,10 +38,10 @@ export function CategoryItem({ label, icon: Icon, value }: CategoryItemProps) {
   return (
     <button
       onClick={onClick}
-      className="w-full lg:w-60 bg-neutral-200 h-24 lg:h-[4.5rem] flex items-start gap-x-8 lg:gap-x-5 p-2 rounded-sm"
+      className="w-full lg:w-60 bg-neutral-200 h-24 lg:h-[4.5rem] flex items-start gap-x-8 lg:gap-x-5 px-4 lg:px-2 py-4 lg:py-2 rounded-sm"
     >
       {Icon && <Icon size={50} />}
-      <div className="h-full justify-between w-4/6 flex flex-col items-start">
+      <div className="space-y-3 w-4/6 flex flex-col items-start">
         <h5 className="truncate font-semibold">{label}</h5>
         <p className="text-sm text-orange-800">Browse category</p>
       </div>
