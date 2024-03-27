@@ -74,31 +74,3 @@ export default async function Home() {
     </main>
   )
 }
-
-// {
-//   categories.map((category) => (
-//     <Link
-//       key={category.id}
-//       href={`#`}
-//       style={{ backgroundColor: category.bgColor }}
-//       className={`w-full md:w-[18rem] lg:w-[260px] h-[90px] p-2 flex items-center gap-3`}
-//     >
-//       <div
-//         className="w-[64px] aspect-square flex items-center justify-center"
-//         style={{ backgroundColor: category.imgColor }}
-//       >
-//         <Image
-//           src={category.image}
-//           alt={category.title}
-//           width={30}
-//           height={30}
-//         />
-//       </div>
-
-//       <div className="flex flex-col items-start gap-1">
-//         <h5 className="text-[16px] font-semibold">{category.title}</h5>
-//         <p className="text-[#6E7485] text-[14px]">{category.nc} courses</p>
-//       </div>
-//     </Link>
-//   ))
-// }
