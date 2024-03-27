@@ -1,12 +1,20 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import { Button } from '@/components/ui/button'
-import { categories } from '@/data'
 import { MoveRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import BestCourses from './_components/BestCourses'
 
-export default function Home() {
+import { db } from '@/lib/db'
+import { Categories } from './_components/categories'
+
+export default async function Home() {
+  const categories = await db.category.findMany({
+    orderBy: {
+      name: 'asc',
+    },
+  })
+
   return (
     <main className="w-full h-fit flex flex-col items-start gap-20 px-2">
       <header className="w-full items-start lg:items-center flex justify-between h-fit py-2 lg:py-0 lg:h-[548px] lg:border-t border-neutral-300">
@@ -42,36 +50,8 @@ export default function Home() {
           <h3 className="text-4xl lg:text-3xl font-semibold ">
             Browse top category
           </h3>
-          <div className="w-full h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start gap-y-2">
-            {categories.map((category) => (
-              <Link
-                key={category.id}
-                href={`#`}
-                style={{ backgroundColor: category.bgColor }}
-                className={`w-full md:w-[18rem] lg:w-[260px] h-[90px] p-2 flex items-center gap-3`}
-              >
-                <div
-                  className="w-[64px] aspect-square flex items-center justify-center"
-                  style={{ backgroundColor: category.imgColor }}
-                >
-                  <Image
-                    src={category.image}
-                    alt={category.title}
-                    width={30}
-                    height={30}
-                  />
-                </div>
-
-                <div className="flex flex-col items-start gap-1">
-                  <h5 className="text-[16px] font-semibold">
-                    {category.title}
-                  </h5>
-                  <p className="text-[#6E7485] text-[14px]">
-                    {category.nc} courses
-                  </p>
-                </div>
-              </Link>
-            ))}
+          <div className="w-full">
+            <Categories items={categories} />
           </div>
 
           <div className="flex items-center gap-1">
@@ -94,3 +74,31 @@ export default function Home() {
     </main>
   )
 }
+
+// {
+//   categories.map((category) => (
+//     <Link
+//       key={category.id}
+//       href={`#`}
+//       style={{ backgroundColor: category.bgColor }}
+//       className={`w-full md:w-[18rem] lg:w-[260px] h-[90px] p-2 flex items-center gap-3`}
+//     >
+//       <div
+//         className="w-[64px] aspect-square flex items-center justify-center"
+//         style={{ backgroundColor: category.imgColor }}
+//       >
+//         <Image
+//           src={category.image}
+//           alt={category.title}
+//           width={30}
+//           height={30}
+//         />
+//       </div>
+
+//       <div className="flex flex-col items-start gap-1">
+//         <h5 className="text-[16px] font-semibold">{category.title}</h5>
+//         <p className="text-[#6E7485] text-[14px]">{category.nc} courses</p>
+//       </div>
+//     </Link>
+//   ))
+// }

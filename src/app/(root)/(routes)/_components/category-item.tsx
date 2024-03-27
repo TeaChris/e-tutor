@@ -12,7 +12,7 @@ interface CategoryItemProps {
   value?: string
 }
 
-export function CategoryItem({ label, icon, value }: CategoryItemProps) {
+export function CategoryItem({ label, icon: Icon, value }: CategoryItemProps) {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -33,7 +33,18 @@ export function CategoryItem({ label, icon, value }: CategoryItemProps) {
       },
       { skipNull: true, skipEmptyString: true }
     )
-    router.push(url)
+    router.push(`/courses/${url}`)
   }
-  return <Link href={``} className="w-52 bg-black"></Link>
+  return (
+    <button
+      onClick={onClick}
+      className="w-full lg:w-60 bg-neutral-200 h-[4.5rem] flex items-start gap-x-5 p-2 rounded-sm"
+    >
+      {Icon && <Icon size={50} />}
+      <div className="space-y-3 w-4/6 flex flex-col items-start">
+        <h5 className="truncate font-semibold">{label}</h5>
+        <p className="text-sm">532 courses</p>
+      </div>
+    </button>
+  )
 }
