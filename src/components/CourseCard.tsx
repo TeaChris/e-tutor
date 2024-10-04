@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { IconBadge } from '@/components/IconBadge'
+import { IconBadge } from '@/components'
 import { BookOpen } from 'lucide-react'
-import { formatPrice } from '@/lib/format'
+import { formatPrice } from '@/lib'
 
 interface CourseCardProps {
   id: string
@@ -13,14 +13,14 @@ interface CourseCardProps {
   category: string
 }
 
-export default function CourseCard({
+const CourseCard = ({
   id,
   title,
   imageUrl,
   sectionsLength,
   price,
   category,
-}: CourseCardProps) {
+}: CourseCardProps) => {
   return (
     <Link href={`/courses/${id}`}>
       <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full">
@@ -78,3 +78,5 @@ export default function CourseCard({
     </Link>
   )
 }
+
+export { CourseCard }
