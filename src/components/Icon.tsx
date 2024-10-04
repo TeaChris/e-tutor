@@ -6,6 +6,8 @@ interface IconProps {
   className: string
 }
 
-export default function Icon({ icon, size, className }: IconProps) {
+const Icon = ({ icon, size, className }: IconProps) => {
   return <Icon icon={icon} size={size} className={className} />
 }
+
+export { Icon }
