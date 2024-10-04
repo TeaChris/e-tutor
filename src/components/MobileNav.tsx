@@ -1,12 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { Button } from './ui/button'
-import { PlusCircle } from 'lucide-react'
-import { isInstructor } from '@/lib/instructor'
 import Image from 'next/image'
-import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
+
+import { Button } from '@/components'
+import { PlusCircle } from 'lucide-react'
+import { cn, isInstructor } from '@/lib'
 
 type Nav = {
   label: string
@@ -25,7 +25,7 @@ interface MobileNavProps {
   userId: string | null
 }
 
-export default function MobileNav({ userId }: MobileNavProps) {
+const MobileNav = ({ userId }: MobileNavProps) => {
   const pathname = usePathname()
   return (
     <aside className="h-full border-r flex flex-col overflow-y-auto bg-black  shadow-sm">
@@ -59,3 +59,5 @@ export default function MobileNav({ userId }: MobileNavProps) {
     </aside>
   )
 }
+
+export { MobileNav }
