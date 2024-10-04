@@ -17,7 +17,8 @@ import {
 } from 'react-icons/fc'
 
 import { IconType } from 'react-icons'
-import CategoryItem from './CategoryItem'
+
+import { CategoryItem } from './CategoryItem'
 
 interface CategoriesProps {
   items: Category[]
@@ -38,7 +39,7 @@ const iconMap: Record<Category['name'], IconType> = {
   Design: FcAlphabeticalSortingZa,
 }
 
-export default function Categories({ items }: CategoriesProps) {
+const Categories = ({ items }: CategoriesProps) => {
   return (
     <div className="flex items-center gap-x-2 overflow-x-auto pb-2">
       {items.map((item) => (
@@ -52,3 +53,5 @@ export default function Categories({ items }: CategoriesProps) {
     </div>
   )
 }
+
+export { Categories }
