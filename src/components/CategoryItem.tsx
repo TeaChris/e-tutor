@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib'
 import qs from 'query-string'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { IconType } from 'react-icons'
@@ -11,11 +11,11 @@ interface CategoryItemProps {
   value?: string
 }
 
-export default function CategoryItem({
+const CategoryItem({
   label,
   icon: Icon,
   value,
-}: CategoryItemProps) {
+}: CategoryItemProps)=> {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -52,3 +52,5 @@ export default function CategoryItem({
     </button>
   )
 }
+
+export {CategoryItem}
