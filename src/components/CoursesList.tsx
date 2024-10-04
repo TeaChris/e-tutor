@@ -1,4 +1,4 @@
-import CourseCard from '@/components/CourseCard'
+import { CourseCard } from '@/components'
 import { Category, Course } from '@prisma/client'
 import Link from 'next/link'
 
@@ -11,7 +11,7 @@ interface CoursesListProps {
   items: CourseWithCategory[]
 }
 
-export default function CoursesList({ items }: CoursesListProps) {
+const CoursesList = ({ items }: CoursesListProps) => {
   return (
     <div>
       <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
@@ -40,3 +40,5 @@ export default function CoursesList({ items }: CoursesListProps) {
     </div>
   )
 }
+
+export { CoursesList }
