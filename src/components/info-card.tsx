@@ -1,4 +1,4 @@
-import { IconBadge } from '@/components/IconBadge'
+import { IconBadge } from '@/components'
 import { LucideIcon } from 'lucide-react'
 
 interface Props {
@@ -9,13 +9,7 @@ interface Props {
   bg?: string
 }
 
-export const InfoCard = ({
-  variant,
-  icon: Icon,
-  numberOfItems,
-  label,
-  bg,
-}: Props) => {
+const InfoCard = ({ variant, icon: Icon, numberOfItems, label, bg }: Props) => {
   return (
     <div
       className={`w-full lg:w-[312px] h-[100px] lg:h-full px-8 flex items-center py-3 space-x-4 bg-[${bg}]`}
@@ -28,3 +22,5 @@ export const InfoCard = ({
     </div>
   )
 }
+
+export { InfoCard }
