@@ -4,8 +4,8 @@ import axios from 'axios'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { Button } from '@/components/ui/button'
-import { formatPrice } from '@/lib/format'
+import { Button } from '@/components'
+import { formatPrice } from '@/lib'
 import { Loader2 } from 'lucide-react'
 
 interface CourseEnrollButtonProps {
