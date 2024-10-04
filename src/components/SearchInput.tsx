@@ -1,13 +1,13 @@
 'use client'
 
-import { Input } from '@/components/ui/input'
-import { useDebounce } from '@/hooks/use-debounce'
+import { Input } from '@/components'
+import { useDebounce } from '@/hooks'
 import { Search } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import qs from 'query-string'
 
-export default function SearchInput() {
+const SearchInput = () => {
   const [value, setValue] = useState<string>('')
   const debouncedValue = useDebounce(value)
 
@@ -42,3 +42,5 @@ export default function SearchInput() {
     </div>
   )
 }
+
+export { SearchInput }
