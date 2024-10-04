@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import MaxWidthWrapper from './MaxWidthWrapper'
+import { MaxWidthWrapper } from '@/components'
 
 export default function Footer() {
   return (
