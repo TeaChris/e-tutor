@@ -1,19 +1,23 @@
 import Link from 'next/link'
-import MaxWidthWrapper from './MaxWidthWrapper'
 import {
   Select,
+  Button,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+  MobileNav,
+  MaxWidthWrapper,
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from '@/components'
 import Image from 'next/image'
-import { Button } from './ui/button'
+
 import { UserButton, auth } from '@clerk/nextjs'
 import { Menu, PlusCircle } from 'lucide-react'
-import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
-import MobileNav from './MobileNav'
-import { isInstructor } from '@/lib/instructor'
+
+import { isInstructor } from '@/lib'
 
 type Nav = {
   label: string
@@ -24,7 +28,7 @@ const nav: Nav = [
   { label: 'Home', href: '/' },
   { label: 'Courses', href: '/courses' },
 ]
-export default async function Navbar() {
+const Navbar = () => {
   const { userId } = auth()
 
   return (
@@ -138,3 +142,5 @@ export default async function Navbar() {
     </nav>
   )
 }
+
+export { Navbar }
