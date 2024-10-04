@@ -5,11 +5,10 @@ import { usePathname } from 'next/navigation'
 import { LogOut } from 'lucide-react'
 import Link from 'next/link'
 
-import { Button } from '@/components/ui/button'
-import SearchInput from '@/components/SearchInput'
-import { isInstructor } from '@/lib/instructor'
+import { Button, SearchInput } from '@/components'
+import { isInstructor } from '@/lib'
 
-export const NavbarRoutes = () => {
+const NavbarRoutes = () => {
   const { userId } = useAuth()
   const pathname = usePathname()
 
@@ -44,3 +43,5 @@ export const NavbarRoutes = () => {
     </>
   )
 }
+
+export { NavbarRoutes }
